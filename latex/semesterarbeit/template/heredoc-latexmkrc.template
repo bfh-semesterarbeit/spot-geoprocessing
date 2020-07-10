@@ -1,0 +1,45 @@
+#!/bin/bash
+# generate variables.txt
+# Based on an idea by Albert Reiner.
+
+OUTFILE=.latexmkrc         # Name of the file to generate.
+
+OUTFILE="${_DESTINATION_DIR}/${OUTFILE}"
+
+# -----------------------------------------------------------
+# 'Here document containing the body of the generated script.
+(
+cat <<'EOF'
+$dvi_previewer = 'start xdvi -watchfile 1.5';
+$ps_previewer  = 'start gv --watch';
+$pdf_previewer = 'start evince';
+
+@cus_dep_list = (@cus_dep_list, "eps pdf 0 eps2pdf");
+sub eps2pdf {
+   system("epstopdf $_[0].eps"); }
+
+$latex = 'latex -interaction=nonstopmode -shell-escape';
+
+$pdflatex = 'pdflatex -interaction=nonstopmode -shell-escape';
+
+$bibtex_use = 2;
+
+EOF
+) > $OUTFILE
+# -----------------------------------------------------------
+
+#  Quoting the 'limit string' prevents variable expansion
+#+ within the body of the above 'here document.'
+#  This permits outputting literal strings in the output file.
+
+if [ -f "$OUTFILE" ]
+then
+  chmod 755 $OUTFILE
+  # Make the generated file executable.
+else
+  echo "Problem in creating file: \"$OUTFILE\""
+fi
+
+
+
+exit 0

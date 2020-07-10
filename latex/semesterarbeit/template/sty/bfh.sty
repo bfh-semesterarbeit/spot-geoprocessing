@@ -1,0 +1,66 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bfh}[2014/01/23 Standard BFH LaTeX package]
+\ProvidesPackage{.template/sty/bfh}[2014/01/23 Standard BFH LaTeX package]
+
+%% Needed packages
+\RequirePackage{color}
+\RequirePackage{colortbl}
+\RequirePackage{fancyhdr}
+\RequirePackage{etoolbox}
+\RequirePackage[table]{xcolor}
+
+% BFH color definition on RGB level
+%---------------------------------------------------------------------------
+\definecolor{BFHGray}{rgb}{0.412,0.49,0.569}
+\definecolor{BFHGray1}{rgb}{0.392,0.471,0.545}
+\definecolor{BFHGray2}{rgb}{0.635,0.682,0.725}
+\definecolor{BFHGray3}{rgb}{0.757,0.788,0.82}
+\definecolor{BFHGray4}{rgb}{0.878,0.894,0.91}
+\definecolor{BFHGray5}{rgb}{0.937,0.945,0.953}
+\definecolor{BFHOrange}{rgb}{0.98,0.647,0}
+\definecolor{BFHArrow}{rgb}{0.98,0.647,0}
+\definecolor{white}{rgb}{1,1,1}
+\definecolor{BFHlink}{rgb}{0,0,0}
+%---------------------------------------------------------------------------
+
+% Table definitions
+%---------------------------------------------------------------------------
+\let\oldtable\table
+\let\endoldtable\endtable
+\renewenvironment{table}{\rowcolors{2}{BFHGray3}{BFHGray5}\oldtable}{\endoldtable}
+%---------------------------------------------------------------------------
+
+% itemize style redefinition
+%---------------------------------------------------------------------------
+\renewcommand{\labelitemi}{\small\color{BFHOrange}$\blacktriangleright$}
+\renewcommand{\labelitemii}{\scriptsize\color{BFHOrange}$\blacktriangleright$}
+\renewcommand{\labelitemiii}{\tiny\color{BFHOrange}$\blacktriangleright$}
+%---------------------------------------------------------------------------
+
+% Set up header and footer
+%---------------------------------------------------------------------------
+\makeatletter
+\patchcmd{\@fancyhead}{\rlap}{\color{BFHGray}\rlap}{}{}	% new color of header
+\patchcmd{\@fancyfoot}{\rlap}{\color{BFHGray}\rlap}{}{}	% new color of footer
+\renewcommand{\headrulewidth}{0.4pt}			% Default \headrulewidth is 0.4pt
+\renewcommand{\footrulewidth}{0.4pt}			% Default \footrulewidth is 0pt
+\makeatother
+
+
+
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter.  #1}{}}
+%---------------------------------------------------------------------------
+\def\chapterNPB#1{{\let\cleardoublepage\relax\chapter{#1}}}  % Chapter with no clear doublepage
+%---------------------------------------------------------------------------
+% Horizontal spaceing between subfigures
+%---------------------------------------------------------------------------
+\newcommand{\subfighspace}{\hspace{3mm}}
+%---------------------------------------------------------------------------
+% Keine "Schusterjungen"
+%---------------------------------------------------------------------------
+%\clubpenalty = 10000
+%---------------------------------------------------------------------------
+% Keine "Hurenkinder"
+%---------------------------------------------------------------------------
+% \widowpenalty = 10000 \displaywidowpenalty = 10000
+%---------------------------------------------------------------------------

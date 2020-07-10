@@ -1,0 +1,36 @@
+#!/bin/bash
+# generate variables.txt
+# Based on an idea by Albert Reiner.
+
+OUTFILE="abstract.tex"         # Name of the file to generate.
+
+OUTFILE="${_DESTINATION_DIR}/content/${OUTFILE}"
+
+# -----------------------------------------------------------
+# 'Here document containing the body of the generated script.
+(
+cat <<'EOF'
+\section*{ABSTRACT}
+This is a template abstract only as a demo
+
+\pagebreak
+
+EOF
+) > $OUTFILE
+# -----------------------------------------------------------
+
+#  Quoting the 'limit string' prevents variable expansion
+#  within the body of the above 'here document.'
+#  This permits outputting literal strings in the output file.
+
+if [ -f "$OUTFILE" ]
+then
+  chmod 755 $OUTFILE
+  # Make the generated file executable.
+else
+  echo "Problem in creating file: \"$OUTFILE\""
+fi
+
+
+
+exit 0

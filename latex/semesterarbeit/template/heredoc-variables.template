@@ -1,0 +1,44 @@
+#!/bin/bash
+# generate variables.txt
+# Based on an idea by Albert Reiner.
+
+OUTFILE="variables.tex"         # Name of the file to generate.
+
+OUTFILE="${_DESTINATION_DIR}/${OUTFILE}"
+
+# -----------------------------------------------------------
+# 'Here document containing the body of the generated script.
+(
+cat <<'EOF'
+\newcommand{\institution}{Berner Fachhochschule}
+\newcommand{\fieldofstudies}{Mikro- und Medizintechnik}
+\newcommand{\course}{BTF5400~ -- Robotics}
+
+\newcommand{\doctype}{Bachelor's Thesis}
+\newcommand{\doctitle}{Science}
+\newcommand{\docsubject}{An interresting Thesis about science stuff}
+\newcommand{\docauthor}{John Doe}
+
+\newcommand{\prof}{Prof. McSmart}
+
+\newcommand{\titleImage}{placeholder}
+
+EOF
+) > $OUTFILE
+# -----------------------------------------------------------
+
+#  Quoting the 'limit string' prevents variable expansion
+#  within the body of the above 'here document.'
+#  This permits outputting literal strings in the output file.
+
+if [ -f "$OUTFILE" ]
+then
+  chmod 755 $OUTFILE
+  # Make the generated file executable.
+else
+  echo "Problem in creating file: \"$OUTFILE\""
+fi
+
+
+
+exit 0

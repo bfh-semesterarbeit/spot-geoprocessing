@@ -1,0 +1,21 @@
+\setlength{\parskip}{0pt}
+
+\makeatletter
+\renewcommand{\listoffigures}{%
+	\vspace*{0em}% reduce space before
+	\noindent{\Large\listfigurename\par}%
+	\vspace{2mm}% space between title and rule
+	\hrule
+	\vspace{2mm}% space below rule
+	\@starttoc{lof}
+	\vspace{4mm}
+	\hrule
+}
+
+\makeatother
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+
+\listoffigures\label{lof}
+\setlength{\parskip}{10pt}
+
+\pagebreak

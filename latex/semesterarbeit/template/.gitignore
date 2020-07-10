@@ -1,0 +1,19 @@
+# Ignore Linux temp files
+*~
+*.swp
+# Ignore Mac specific files
+.DS_Store
+# Ignore Windows temp files
+*.log
+*.temp
+*.tmp
+# Ignore NFS lock ressources
+.nfs*
+# Ignore Snapshots directories
+.snapshot
+# Ignore all autobuild directories
+_*
+#Ignore markdownIpreview document
+*-preview*
+# Ignore OneNote files
+*.onetoc2

@@ -1,0 +1,58 @@
+# Ignore Linux temp files
+*~
+*.swp
+
+# Ignore Mac specific files
+.DS_Store
+
+# Ignore Windows temp files
+*.log
+*.temp
+*.tmp
+*.onetoc2
+~*
+
+# TexMaker files
+*.aux
+*.out
+*.synctex.gz
+*.toc
+*.glsdefs
+*.bbl
+*.blg
+*.log
+*.acn
+*.glo
+*.idx
+*.ist
+*.lof
+*.lot
+
+# Ignore NFS lock ressources
+.nfs*
+
+# Ignore Snapshots directories
+.snapshot
+
+#ignore all autobuild directories
+_*
+
+# ignore Emacs temp buffers
+\#*
+\.#*
+
+# ignore TAR archives
+*.tar
+
+# exclude vc version-check scripts
+vc.tex
+temp/
+*.log
+
+# do not track merge or other orig cpy files
+*.orig
+
+# exclude files other than *.c from exsrc
+exsrc/*
+!exsrc/*.c
+

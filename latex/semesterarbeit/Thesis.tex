@@ -1,0 +1,147 @@
+%
+% Main document
+% ===========================================================================
+% This is part of the document "Project documentation template".
+% Authors: brd3, ngm1, hga3, sdl3
+%
+
+
+
+%---------------------------------------------------------------------------
+% define document class
+%---------------------------------------------------------------------------
+\documentclass[
+	 a4paper			% paper format
+	,10pt				% fontsize
+%	,twoside			% double-sided
+%	,parskip=half			% set paragraph skip to half of a line
+]{scrartcl}				% KOMA-script report
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Set up page dimension
+%---------------------------------------------------------------------------
+\usepackage[
+	a4paper
+	,left=30mm
+	,right=15mm
+	,top=25mm
+	,headheight=0mm
+	,headsep=10mm
+	,footskip=15mm
+]{geometry}
+%---------------------------------------------------------------------------
+
+
+
+%---------------------------------------------------------------------------
+% Load Packages:
+%---------------------------------------------------------------------------
+\usepackage{template/sty/bfh}
+\input{template/packages}
+\usepackage{template/sty/thesis}
+\usepackage{lipsum}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Define document properties
+%---------------------------------------------------------------------------
+\input{variables}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Hyperref Package (Create links in a pdf)
+%---------------------------------------------------------------------------
+\usepackage[
+	pdftex
+	,ngerman
+	,bookmarks
+	,plainpages=false
+	,pdfpagelabels
+	,backref = {false},		% No index backreference
+	,colorlinks = {true},		% Color links in a PDF
+	,hypertexnames = {true},	% no failures "same page(i)"
+	,bookmarksopen = {true},	% opens the bar on the left side
+	,bookmarksopenlevel = {0}	% depth of opened bookmarks
+	,pdftitle = {\doctitle}		% PDF-property
+	,pdfauthor = {\@author}		% PDF-property
+	,pdfsubject = {\docsubject}	% PDF-property
+	,linkcolor = {BFHlink}		% Color of Links
+	,citecolor = {BFHlink}		% Color of Cite-Links
+	,urlcolor = {BFHlink}		% Color of URLs
+]{hyperref}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% usefull commands
+%---------------------------------------------------------------------------
+\def\matlab{{\em MatLab}}
+\def\octave{{\em Octave}}
+\newcommand{\includecode}[2][c]{\lstinputlisting[caption=#2, language=#1]{#2}}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+%---------------------------------------------------------------------------
+
+% ---------------------------------------------------------------------------
+% Bibliography resource
+% --------------------------------------------------------------------------
+
+\addbibresource{bibliography.bib}
+%\bibliography{bibliography}
+%\bibliographystyle{abbrv}
+
+
+% ---------------------------------------------------------------------------
+% Graphic paths
+%---------------------------------------------------------------------------
+\graphicspath{{template/}{pictures/}{svg/}}
+
+%---------------------------------------------------------------------------
+% The document
+%---------------------------------------------------------------------------
+\begin{document}
+% Title
+%---------------------------------------------------------------------------
+\pagestyle{empty}
+\input{content/0-title}
+
+%---------------------------------------------------------------------------
+% Lead
+%---------------------------------------------------------------------------
+\startLead
+\input{content/1-spruch}
+\input{content/abstract}
+\input{template/toc}
+\input{template/lof}
+%---------------------------------------------------------------------------
+% Contents
+%---------------------------------------------------------------------------
+\startMainPart
+\input{content/samples}
+
+
+%---------------------------------------------------------------------------
+% Bibliography
+%---------------------------------------------------------------------------
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+\renewcommand{\bibname}{Literaturverzeichnis}
+\printbibliography
+
+
+%---------------------------------------------------------------------------
+% Appendix
+%---------------------------------------------------------------------------
+\startAppendix
+\section{Demo Anhang}\label{app:demo}
+\appendCode{c}{Sample Code}{src/sampleCode.c}
+
+
+%---------------------------------------------------------------------------
+\end{document}
+%---------------------------------------------------------------------------
+

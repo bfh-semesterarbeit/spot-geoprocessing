@@ -1,0 +1,4 @@
+version=0.6.0
+typesetter=pdflatex
+steps=texpdf
+root=/home/saibot/tmp/semesterarbeit/content/1-spruch.tex

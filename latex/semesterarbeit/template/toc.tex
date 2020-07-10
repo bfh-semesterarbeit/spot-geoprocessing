@@ -1,0 +1,23 @@
+\setlength{\parskip}{0pt}
+
+%% Tabel of contents
+\makeatletter
+\renewcommand{\tableofcontents}{%
+	\vspace*{0em}% reduce space before
+	\noindent{\Large\contentsname\par}%
+	\vspace{2mm}% space between title and rule
+	\hrule
+	\vspace{2mm}% space below rule
+	\@starttoc{toc}
+	\vspace{4mm}
+	\hrule
+}
+
+\makeatother
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\setcounter{tocdepth}{3}
+
+\tableofcontents\label{toc}
+\setlength{\parskip}{10pt}
+
+\pagebreak

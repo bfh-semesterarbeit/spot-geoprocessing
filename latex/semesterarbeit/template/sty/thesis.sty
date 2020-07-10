@@ -1,0 +1,181 @@
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{fancyhdr}
+%\ProvidesPackage{thesis}[2014/01/23 Standard BFH LaTeX package]
+%\ProvidesPackage{.template/sty/thesis}[2014/01/23 Standard BFH LaTeX package]
+
+
+%---------------------------------------------------------------------------
+% format adjustments
+%---------------------------------------------------------------------------
+% table paddings
+\renewcommand{\arraystretch}{1.5}
+
+% paragraph spacing
+\raggedbottom
+\setlength{\parskip}{10pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
+% image caption
+\renewcommand{\figurename}{Abbildung}
+\renewcommand{\tablename}{Tabelle}
+
+% start every section on a new page
+\newcommand{\sectionbreak}{\newpage}
+
+
+%---------------------------------------------------------------------------
+% usefull commands
+%---------------------------------------------------------------------------
+% fullref command for refs with section number and name
+\newcommand*{\fullref}[1]{
+	\textit{\hyperref[{#1}]{\ref*{#1}~\nameref*{#1}}}
+}
+
+\newcommand*{\fullpageref}[1]{
+	\textit{\hyperref[{#1}]{\ref*{#1}~\nameref*{#1} (p.~\pageref{#1})}}
+}
+
+\newcommand*{\appendixref}[2]{
+    \textit{\hyperref[{#1}]{\ref*{#1}~\nameref*{#1} (p.~\ref{#1}-#2)}}
+}
+
+
+% wrapper command for appendix
+\newcommand*{\appendPDF}[1]{
+	\setcounter{page}{1}
+	\includepdf[pages=-,pagecommand={\pagestyle{appendix}}\label{end:append:\thesection},scale=0.8]{#1}
+	\pagebreak
+}
+
+\newcommand*{\appendWidePDF}[1]{
+	\setcounter{page}{1}
+	\includepdf[pages=-,landscape=true,pagecommand={\pagestyle{appendix}}\label{end:append:\thesection},scale=0.8]{#1}
+	\label{end:append:\thesection}
+	\pagebreak
+}
+
+\newcommand*{\appendLscapePDF}[1]{
+	\begin{landscape}
+		\setcounter{page}{1}
+		\includepdf[pages=-,landscape=true,nup=1x2,pagecommand={\pagestyle{appendix}}\label{end:append:\thesection},scale=0.85]{#1}
+		\label{end:append:\thesection}
+	\end{landscape}
+
+	\pagebreak
+}
+
+%\newcommand*{\appendLarge}[1]{
+%	\setcounter{page}{1}
+%	\input{#1}
+%	\label{end:append:\thesection}
+%	\pagebreak
+%}
+
+\newcommand*{\appendLaTeX}[1]{
+	\setcounter{page}{1}
+	\input{#1}
+	\label{end:append:\thesection}
+	\pagebreak
+}
+
+\newcommand*{\appendCode}[3]{
+	\setcounter{page}{1}
+	\lstinputlisting[language=#1,caption=#2]{#3}
+	\label{end:append:\thesection}
+	\pagebreak
+}
+
+
+% kick-starters
+\newcommand*{\startLead}{
+	\cleardoublepage
+	\setcounter{page}{1}
+	\pagestyle{lead}
+	\pagenumbering{roman}
+}
+
+\newcommand*{\startMainPart}{
+	\cleardoublepage
+	\renewcommand\thesection{\arabic{section}}
+	\pagenumbering{arabic}
+	\pagestyle{plain}
+}
+
+\newcommand*{\startAppendix}{
+	\label{mainPartEndPager}
+	\cleardoublepage
+	\counterwithin*{equation}{section}
+	\setcounter{section}{0}
+	\renewcommand\thesection{\Alph{section}}
+	\pagenumbering{arabic}
+	\pagestyle{appendix}
+}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Header/Footer
+%---------------------------------------------------------------------------
+% Lead
+\fancypagestyle{lead}{
+	\fancyhead[L]{\institution}
+	\fancyhead[C]{\thechapter\space\rightmark}
+	\fancyhead[R]{\fieldofstudies}
+
+	\fancyfoot[L]{Autor: \docauthor}
+	\fancyfoot[C]{Letzte Änderung: \today}
+	\fancyfoot[R]{Seite \thepage{} of \pageref*{toc}}
+}
+
+\fancypagestyle{plain}{
+	\fancyhead[L]{\institution}
+	\fancyhead[C]{\thechapter\space\rightmark}
+	\fancyhead[R]{\fieldofstudies}
+
+	\fancyfoot[L]{Autor: \docauthor}
+	\fancyfoot[C]{Letzte Änderung: \today}
+	\fancyfoot[R]{Seite \thepage{} of \pageref*{mainPartEndPager}}
+}
+
+\fancypagestyle{appendix}{
+	\fancyhead[L]{\institution}
+	\fancyhead[C]{\thechapter\space\rightmark}
+	\fancyhead[R]{\fieldofstudies}
+
+	\fancyfoot[L]{Autor: \docauthor}
+	\fancyfoot[C]{Letzte Änderung: \today}
+	\fancyfoot[R]{Seite \thesection-\thepage{} of \thesection-\pageref*{end:append:\thesection}}
+}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Syntax highlighting
+%---------------------------------------------------------------------------
+\definecolor{bggray}{rgb}{0.9, 0.9, 0.9}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{ocherCode}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{blueCode}{rgb}{0, 0, 0.93} % #0000EE -> rgb(0, 0, 238)
+\definecolor{greenCode}{rgb}{0, 0.6, 0} % #009900 -> rgb(0, 153, 0)
+\renewcommand{\ttdefault}{pcr}
+\lstset {
+  language=ksh,
+  basicstyle={\footnotesize\ttfamily},
+  numbers=none, %left,
+  backgroundcolor=\color{bggray},
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  keywordstyle={\bfseries\color{ocherCode}},
+  commentstyle={\color{greenCode}\textit},
+  stringstyle=\color{blueCode},
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  morekeywords={PHONY, OBJ, gcc}  % <-- adding custom keywords
+}
+%---------------------------------------------------------------------------
+

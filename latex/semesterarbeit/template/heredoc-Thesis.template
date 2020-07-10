@@ -1,0 +1,170 @@
+#!/bin/bash
+# generate variables.txt
+# Based on an idea by Albert Reiner.
+
+OUTFILE="Thesis.tex"         # Name of the file to generate.
+
+OUTFILE="${_DESTINATION_DIR}/${OUTFILE}"
+
+# -----------------------------------------------------------
+# 'Here document containing the body of the generated script.
+(
+cat <<'EOF'
+%
+% Main document
+% ===========================================================================
+% This is part of the document "Project documentation template".
+% Authors: brd3, ngm1, hga3, sdl3
+%
+
+%---------------------------------------------------------------------------
+% define document class
+%---------------------------------------------------------------------------
+\documentclass[
+	 a4paper			% paper format
+	,10pt				% fontsize
+%	,twoside			% double-sided
+%	,parskip=half			% set paragraph skip to half of a line
+]{scrartcl}				% KOMA-script report
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Set up page dimension
+%---------------------------------------------------------------------------
+\usepackage[
+	a4paper
+	,left=30mm
+	,right=15mm
+	,top=25mm
+	,headheight=0mm
+	,headsep=10mm
+	,footskip=15mm
+]{geometry}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Load Packages:
+%---------------------------------------------------------------------------
+\usepackage{.template/sty/bfh}
+\input{.template/packages}
+\usepackage{.template/sty/thesis}
+\usepackage{lipsum}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Define document properties
+%---------------------------------------------------------------------------
+\input{variables}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% Hyperref Package (Create links in a pdf)
+%---------------------------------------------------------------------------
+\usepackage[
+	pdftex
+	,ngerman
+	,bookmarks
+	,plainpages=false
+	,pdfpagelabels
+	,backref = {false},		% No index backreference
+	,colorlinks = {true},		% Color links in a PDF
+	,hypertexnames = {true},	% no failures "same page(i)"
+	,bookmarksopen = {true},	% opens the bar on the left side
+	,bookmarksopenlevel = {0}	% depth of opened bookmarks
+	,pdftitle = {\doctitle}		% PDF-property
+	,pdfauthor = {\@author}		% PDF-property
+	,pdfsubject = {\docsubject}	% PDF-property
+	,linkcolor = {BFHlink}		% Color of Links
+	,citecolor = {BFHlink}		% Color of Cite-Links
+	,urlcolor = {BFHlink}		% Color of URLs
+]{hyperref}
+%---------------------------------------------------------------------------
+
+
+%---------------------------------------------------------------------------
+% usefull commands
+%---------------------------------------------------------------------------
+\def\matlab{{\em MatLab}}
+\def\octave{{\em Octave}}
+\newcommand{\includecode}[2][c]{\lstinputlisting[caption=#2, language=#1]{#2}}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+%---------------------------------------------------------------------------
+
+% ---------------------------------------------------------------------------
+% Bibliography resource
+% --------------------------------------------------------------------------
+\addbibresource{bibliography.bib}
+
+% ---------------------------------------------------------------------------
+% Graphic paths
+%---------------------------------------------------------------------------
+\graphicspath{{.template/}{pictures/}{svg/}}
+
+%---------------------------------------------------------------------------
+% The document
+%---------------------------------------------------------------------------
+\begin{document}
+% Title
+%---------------------------------------------------------------------------
+\pagestyle{empty}
+\input{.template/title}
+
+%---------------------------------------------------------------------------
+% Lead
+%---------------------------------------------------------------------------
+\startLead
+\input{content/abstract}
+\input{.template/toc}
+
+
+%---------------------------------------------------------------------------
+% Contents
+%---------------------------------------------------------------------------
+\startMainPart
+\input{content/samples}
+
+
+%---------------------------------------------------------------------------
+% Bibliography
+%---------------------------------------------------------------------------
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{section}{Bibliography}
+%\printbibliography
+
+
+%---------------------------------------------------------------------------
+% Appendix
+%---------------------------------------------------------------------------
+\startAppendix
+\section{Demo Appendix}\label{app:demo}
+\appendCode{c}{Sample Code}{src/sampleCode.c}
+
+
+%---------------------------------------------------------------------------
+\end{document}
+%---------------------------------------------------------------------------
+
+EOF
+) > $OUTFILE
+# -----------------------------------------------------------
+
+#  Quoting the 'limit string' prevents variable expansion
+#  within the body of the above 'here document.'
+#  This permits outputting literal strings in the output file.
+
+if [ -f "$OUTFILE" ]
+then
+  chmod 755 $OUTFILE
+  # Make the generated file executable.
+else
+  echo "Problem in creating file: \"$OUTFILE\""
+fi
+
+
+
+exit 0
