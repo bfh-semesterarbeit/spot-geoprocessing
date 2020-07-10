@@ -16,8 +16,8 @@
 \setlength{\parindent}{0pt}
 
 % image caption
-\renewcommand{\figurename}{Abbildung}
-\renewcommand{\tablename}{Tabelle}
+\renewcommand{\figurename}{Abbildungsverzeichnis}
+\renewcommand{\tablename}{Tabellenverzeichnis}
 
 % start every section on a new page
 \newcommand{\sectionbreak}{\newpage}
@@ -51,7 +51,7 @@
 	\setcounter{page}{1}
 	\includepdf[pages=-,landscape=true,pagecommand={\pagestyle{appendix}}\label{end:append:\thesection},scale=0.8]{#1}
 	\label{end:append:\thesection}
-	\pagebreak
+	pagebreak
 }
 
 \newcommand*{\appendLscapePDF}[1]{
@@ -79,7 +79,7 @@
 }
 
 \newcommand*{\appendCode}[3]{
-	\setcounter{page}{1}
+	%\setcounter{page}{1}
 	\lstinputlisting[language=#1,caption=#2]{#3}
 	\label{end:append:\thesection}
 	\pagebreak
@@ -104,10 +104,11 @@
 \newcommand*{\startAppendix}{
 	\label{mainPartEndPager}
 	\cleardoublepage
-	\counterwithin*{equation}{section}
-	\setcounter{section}{0}
+	%\counterwithin*{equation}{section}
+	%\setcounter{section}{0}
+	\setcounter{page}{1}
 	\renewcommand\thesection{\Alph{section}}
-	\pagenumbering{arabic}
+	\pagenumbering{Roman}
 	\pagestyle{appendix}
 }
 %---------------------------------------------------------------------------
@@ -124,7 +125,7 @@
 
 	\fancyfoot[L]{Autor: \docauthor}
 	\fancyfoot[C]{Letzte Änderung: \today}
-	\fancyfoot[R]{Seite \thepage{} of \pageref*{toc}}
+	\fancyfoot[R]{Seite \thepage{} von \pageref*{lof}}
 }
 
 \fancypagestyle{plain}{
@@ -134,7 +135,7 @@
 
 	\fancyfoot[L]{Autor: \docauthor}
 	\fancyfoot[C]{Letzte Änderung: \today}
-	\fancyfoot[R]{Seite \thepage{} of \pageref*{mainPartEndPager}}
+	\fancyfoot[R]{Seite \thepage{} von \pageref*{mainPartEndPager}}
 }
 
 \fancypagestyle{appendix}{
@@ -144,7 +145,9 @@
 
 	\fancyfoot[L]{Autor: \docauthor}
 	\fancyfoot[C]{Letzte Änderung: \today}
-	\fancyfoot[R]{Seite \thesection-\thepage{} of \thesection-\pageref*{end:append:\thesection}}
+	%\fancyfoot[R]{Seite \thesection-\thepage{} von \thesection-\pageref*{end:append:\thesection}}
+	\fancyfoot[R]{Anhang \thesection \space Seite \thepage{}}
+	%\fancyfoot[R]{Anhang \thesection }
 }
 %---------------------------------------------------------------------------
 

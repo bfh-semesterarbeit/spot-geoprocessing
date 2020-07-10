@@ -2149,6 +2149,8 @@
   <bcf:section number="0">
     <bcf:citekey order="1">CloudNativ:1</bcf:citekey>
     <bcf:citekey order="2">DUMMY:1</bcf:citekey>
+    <bcf:citekey order="4">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="5">AmazonAWSSpot:1</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
