@@ -35,7 +35,7 @@
 .snapshot
 
 #ignore all autobuild directories
-_*
+#_*
 
 # ignore Emacs temp buffers
 \#*
