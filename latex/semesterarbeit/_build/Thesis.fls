@@ -478,9 +478,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbras8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs8.tfm
-INPUT pictures/terrain.png
-INPUT pictures/terrain.png
-INPUT pictures/terrain.png
+INPUT pictures/hippie_car.jpg
+INPUT pictures/hippie_car.jpg
+INPUT pictures/hippie_car.jpg
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT content/1-spruch.tex
 INPUT content/1-spruch.tex
