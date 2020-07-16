@@ -28,6 +28,9 @@
 *.lof
 *.lot
 
+# Bibitex Jabref
+*.bib.sav
+
 # Ignore NFS lock ressources
 .nfs*
 

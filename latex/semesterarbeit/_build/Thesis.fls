@@ -501,9 +501,8 @@ INPUT _build/Thesis.lof
 INPUT _build/Thesis.lof
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso10.tfm
 OUTPUT _build/Thesis.lof
-INPUT content/vorgehen.tex
-INPUT content/vorgehen.tex
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
+INPUT content/einfuehrung.tex
+INPUT content/einfuehrung.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss8.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss8.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/rm-lmr8.tfm
@@ -518,6 +517,12 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbras8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs8.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss8.tfm
+INPUT pictures/hist_map_geo_admin.png
+INPUT pictures/hist_map_geo_admin.png
+INPUT pictures/hist_map_geo_admin.png
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
+INPUT content/vorgehen.tex
+INPUT content/vorgehen.tex
 INPUT pictures/kanban.png
 INPUT pictures/kanban.png
 INPUT pictures/kanban.png
