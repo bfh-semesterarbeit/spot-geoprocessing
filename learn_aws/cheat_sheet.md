@@ -50,7 +50,7 @@ Good postition to work with SPOT:
 - Can only be retrieved from the instance itself https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html
 
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") \
-&& curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/
+&& curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/
 
 **you have to use the IP in the example: Not your IP**
 
@@ -58,15 +58,12 @@ TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-meta
 
 
 
-http://169.254.169.254/latest/meta-data/spot/instance-action
+http://169.254.169.254/latest/meta-data/instance-action
 ```bash
 # stop
 {"action": "stop", "time": "2017-09-18T08:22:00Z"}
 
-# terminate
-{"action": "terminate", "time": "2017-09-18T08:22:00Z"}
 ```
-http://169.254.169.254/latest/meta-data/spot/termination-time
 
 
 What is AWS Cloud Formation?
