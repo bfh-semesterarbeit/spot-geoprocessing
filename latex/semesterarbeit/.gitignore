@@ -30,6 +30,7 @@
 
 # Bibitex Jabref
 *.bib.sav
+*.bib.bak
 
 # Ignore NFS lock ressources
 .nfs*

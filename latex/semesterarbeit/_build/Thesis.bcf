@@ -2151,8 +2151,13 @@
     <bcf:citekey order="2">HippieCar:1</bcf:citekey>
     <bcf:citekey order="3">CloudNativ:1</bcf:citekey>
     <bcf:citekey order="4">DUMMY:1</bcf:citekey>
-    <bcf:citekey order="7">AmazonAWSSpot:1</bcf:citekey>
-    <bcf:citekey order="8">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="7">Schertenleib2004</bcf:citekey>
+    <bcf:citekey order="8">Informatik2010</bcf:citekey>
+    <bcf:citekey order="9">Balstroem</bcf:citekey>
+    <bcf:citekey order="10">Kehlmann2005</bcf:citekey>
+    <bcf:citekey order="11">Christ2020</bcf:citekey>
+    <bcf:citekey order="12">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="13">AmazonAWSSpot:1</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

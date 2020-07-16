@@ -70,3 +70,6 @@ http://169.254.169.254/latest/meta-data/spot/termination-time
 
 
 What is AWS Cloud Formation?
+
+# Walktrough launch ec2 and mount efs
+<https://docs.aws.amazon.com/efs/latest/ug/wt1-getting-started.html>
