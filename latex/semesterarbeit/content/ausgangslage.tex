@@ -4,7 +4,7 @@ Hier werden das Arbeitsumfeld und die Aufgaben beschrieben, aus denen sich die P
 \subsection{swisstopo bei AWS}
 Es liegt auf der Hand, dass die swisstopo als \emph{Geoinformationszentrum} auf Cloud Computing setzt. Die swisstopo nutzt Cloud Computing mit AWS\footnote{Amazon Web Services} seit mehr als 10 Jahren für den Betrieb des Geoportal des Bundes.
  
-\textit{"Mit der BGDI unter AWS können wir derzeit ca. eine Million Internetbenutzer pro Monat bedienen. Dank AWS können wir die zur Zuordnung neuer Server benötigte Zeit erheblich verkürzen und unseren Fokus auf echte Kundenanforderungen verstärken."} \cite{Christ2020}.
+\textit{"Mit der BGDI\footnote{Bundesgeodateninfrastruktur: Viewer und andere Services} unter AWS können wir derzeit ca. eine Million Internetbenutzer pro Monat bedienen. Dank AWS können wir die zur Zuordnung neuer Server benötigte Zeit erheblich verkürzen und unseren Fokus auf echte Kundenanforderungen verstärken."} \cite{Christ2020}.
 
 
 \subsection{Publikation von Geodaten}
@@ -23,21 +23,34 @@ Microservices gestaffelt erfolgen, diese Services werden als Docker Container la
 Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
 Integration wird AWS Codebuild/Pipeline zum Einsatz kommen.
 
+\newpage
+
 \subsection{Exkurs 3D Daten}
-\begin{itemize}
-\item Webseite absuchen
-\item Bild dazu
-\end{itemize}
+Die swisstopo erfasst und aktualisiert Daten mit einem räumlichen Bezug. Diese Geodaten sind die Basis für die Ableitung in eine Vielzahl von Produkten, wie die Landeskarten 1:25'000. Nebst Karten gibt es die Produktpalette der Landschaftsmodelle. Diese geben die Objekte der Landschaft im flexiblen Vektorformat wieder. Sie bestehen aus thematischen Ebenen (Bsp. Gebäude). Jede Ebene umfasst georeferenzierte Punkt-, Linien-, Flächen- oder 3D-Objekte. Jedes Objekt enthält Attribute und Beziehungen \cite{toposhop2010}.
+
+Zu den Lanschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D. Im Viewer wird eine Auswahl von Themen aus eben diesen Landschaftsmodellen dargestellt: Zurzeit Gebäude, Bäume, Seilbahnen, Namen und das Terrain. Vor wenigen Jahren wurden diese 3D Daten mit einem grossen Effort medienwirksam publiziert.
+
+\begin{figure}[H]
+	\centering
+	\href{https://s.geo.admin.ch/8a8ce63073}{
+	\includegraphics[width=.80\textwidth]{bfh_3d}}
+	\caption{Im Viewer werden zurzeit Gebäude, Bäume, Seilbahnen, Namen und das Terrain dargestellt. Um aktuell zu bleiben, müssen diese 3D Daten regelmässig nachgeführt werden.}
+	\label{fig:bfh_3d}
+\end{figure}
+
+Seit dem Erfolg der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und punkto Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
+
+Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}}. Aber früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
 
 \section{Poblemstellung}
 
-Es ist der swisstopo (strategisch) schon lange ein Anliegen, dass die Publikationsprozesse von Geodaten optimiert werden
+Es ist der swisstopo schon lange ein Anliegen, dass die Publikationsprozesse von Geodaten optimiert werden
 sollen. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
 
 Besonders aufwändig erweist sich zurzeit die Publikation von 3D Daten. Die manuelle Publikation
 der 3D Daten benötigt eigene Tools, die auf einem performanten und somit teuren Rechner laufen
 müssen. Ausserdem erfordert die Bereitstellung einen hohen Koordinationsaufwand zwischen der
-Infrastruktur und der Entwicklung. Häufig passiert es, dass Mängel in den 3D Daten erst nach
+Infrastruktur und der Entwicklung. Dabei passiert es, dass Mängel in den 3D Daten erst nach
 beendeter Webpublikation bemerkt werden; und der ganze Publikationsprozess muss wieder von
 vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
@@ -53,3 +66,8 @@ Daten selbst automatisch publizieren und prüfen könnte.
 \end{itemize}
 
 \subsection{Aufwand der Prozessierung}
+
+
+\subsection{Technologie Stack}
+
+
