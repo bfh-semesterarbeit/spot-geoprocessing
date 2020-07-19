@@ -1,9 +1,12 @@
 \section{Vorgehen}
-In diesem Kapitel wird das Vorgehen beschrieben, wie die Arbeit geplant und erledigt wurde.
+In diesem Kapitel wird das Vorgehen beschrieben, wie die Arbeit geplant und realisiert wurde.
 
 \subsection{Arbeitsmethodik}
-Um die Übersicht nicht zu verlieren, wurde beschlossen, nach Kanban zu arbeiten. Da eigens für die Arbeit ein Repository auf \emph{github.com}\footnote{\href{https://github.com/bfh-semesterarbeit/spot-geoprocessing/projects/1}{Projekt auf github.com}} angelegt wurde, konnte auch gleich ein Kanban erstellt werden.
-\textbf{TODO: Theorie über Kanban - evtl. mit Fachbegriffen verhängen}
+Da die Arbeit nur von einem Autor umgesetzt wurde, musste bezüglich Arbeitsmethodik nur wenig definiert und koordiniert werden.
+
+Um zu starten, hat dem Autor geholfen, dass der Experte \prof\space bereits anfangs Sommer (16. Juli) einen ersten Besprechungstermin angesetzt hat. Um eine Diskussionsbasis für diesen Termin zu haben, musste sich der Autor ernsthaft mit der Semesterarbeit auseinandersetzen. Dazu hat er aus einer BFH Vorlage \footnote{Herzlichen Dank an Andreas Habegger und Lukas Studer fürs bereitstellen der \href{https://gitlab.ti.bfh.ch/latex-utils/tpl_latex-thesis}{Vorlage}} ein Gerüst der Arbeit erstellt und stichwortartig abgefüllt. Nach gründlicher Diskussion mit dem Experten wurde dieses Gerüst etwas angepasst und diente von da an als Basis für die Arbeit; wo sich die Kapitel zunehmend von losen Notizen zum finalen Zustand festigten.
+
+Um die Übersicht nicht zu verlieren, wurde beschlossen, nach Kanban zu arbeiten, respektive ein Kanban Board zu verwenden. Weil für die Arbeit sowieso Repository auf \emph{github.com}\footnote{\href{https://github.com/bfh-semesterarbeit/spot-geoprocessing/projects/1}{Projekt auf github.com}} angelegt wurde, konnte dort auch gleich ein Kanban erstellt werden. Das Kanban Board wurde vor allem auch dafür genutzt, fortlaufend neue kleine Aufgaben aufzulisten und darauf zu achten, die Menge der angefangenen Arbeit zu begrenzen.
 
 \begin{figure}[H]
 	\centering
@@ -12,19 +15,28 @@ Um die Übersicht nicht zu verlieren, wurde beschlossen, nach Kanban zu arbeiten
 	\label{fig:Klassisches Kanban}
 \end{figure}
 
-\subsection{Arbeitsweise}
-Der Experte \prof \space begleitet die Arbeit seit unserem ersten Treffen, das vom 14. Juli 2020. Wir sind so verblieben.... , dass wir uns dann und wann wieder treffen. Die Arbeit, wie im Projektplan und in den Kanban Tickets definiert abgearbeitet wird... bei Fragen ...
+Dadurch konnte im Alltag (wenn gerade etwas Zeit zur Verfügung stand) eine solche Aufgabe genommen und erledigt werden. Es wurde nicht strikte nach Kanban gearbeitet, aber einige Prinzipien daraus wurden verwendet. Zum Beispiel \textit{"Beginne mit dem, was du gerade tust:
+In diesem Grundprinzip stecken zwei Dinge. Indem man mit dem beginnt, was man gerade tut, beendet man die aktuelle Arbeit, bevor etwas Neues begonnen wird. Genauso ist hier aber auch die Atussage enthalten, dass Kanban einfach eingeführt werden kann."}\cite{kanban2010}.
+
 
 \subsection{Projektplan}\label{chap:projektplan}
-\href{https://docs.google.com/spreadsheets/d/1zKTZgt4BW736G0xRfU9o3vWYwAJj-8nzFvGsPR7yJ_0/edit?usp=sharing}{Projektplan}\footnote{\href{https://docs.google.com/spreadsheets/d/1zKTZgt4BW736G0xRfU9o3vWYwAJj-8nzFvGsPR7yJ_0/edit?usp=sharing/edit?usp=sharing}{URL Google Spreadsheet}}
+Um den übergeordneten Rahmen der Arbeit nicht aus dem Fokus zu verlieren und um sich bewusst zu machen, wieviel Zeit generell bis zur Abgabe zur Verfügung steht, war es hilfreich, einen Projektplan mit Meilensteinen zu erstellen. Durch die Berner Fachhochschule waren die grundlegenden Meilensteine bereits vorgegeben.
 
-\section{Vorarbeiten}
-\subsection{AWS Account}
+\begin{figure}[H]
+	\centering
+	\href{https://docs.google.com/spreadsheets/d/1zKTZgt4BW736G0xRfU9o3vWYwAJj-8nzFvGsPR7yJ_0/edit?usp=sharing}{
+	\includegraphics[width=.95\textwidth]{projektplanung}}
+	\caption{\href{https://docs.google.com/spreadsheets/d/1zKTZgt4BW736G0xRfU9o3vWYwAJj-8nzFvGsPR7yJ_0/edit?usp=sharing}{Projektplan}}
+	\label{fig:Projektplan}
+\end{figure}
+
+\subsection{Vorarbeiten}
+\subsubsection{AWS Account}
 \begin{itemize}
 	\item Fit werden mit AWS
 \end{itemize}
 
-\subsection{AWS Spot Instances}
+\subsubsection{AWS Spot Instances}
 \begin{itemize}
 	\item Herausfinden wie mit AWS Spot Instanzen gearbeitet werden kann
 \end{itemize}
@@ -35,7 +47,7 @@ Der Experte \prof \space begleitet die Arbeit seit unserem ersten Treffen, das v
 	\label{fig:AWS Architektur Spot}
 \end{figure}
 
-\subsection{Kubernetes testing}
+\subsubsection{Kubernetes testing}
 \begin{itemize}
 	\item Anfangs mit Minicube
 	\item Eigenem AWS account
