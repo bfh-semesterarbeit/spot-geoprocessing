@@ -74,10 +74,15 @@ aws efs create-mount-target \
 --region eu-west-1
 
 
-# On instance
+# On instance amazon linux (ec2-user)
 sudo yum -y update
 sudo reboot  # dont know why... like windows
 sudo yum -y install nfs-utils
+
+# On instance ubuntu (ubuntu)
+sudo apt-get update
+sudo apt-get install nfs-common
+
 mkdir ~/efs-mount-point 
 cd ~/efs-mount-point  
 sudo chmod go+rw .

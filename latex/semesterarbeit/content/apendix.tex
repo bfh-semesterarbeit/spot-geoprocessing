@@ -21,10 +21,14 @@ Anhand einer Anleitung, einem sogenannten Walktrough wurde via AWS CLI (AWS Comm
 EFS an eine EC2-Instanz gemountet und die 3D Daten wurden dorthin kopiert.
 \appendCode{bash}{EFS auf EC2-Instanz mounten}{src/walktrough_ec2_and_efs.sh}
 
+\subsection{Von der Instanz aus abfragen, was ihr Status ist}
+Von der Instanz aus kann via REST API Metadaten der Instanz abgefragt werden. Bezüglich Determinierung einer Spot-Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht.
+\appendCode{bash}{Status der Instanz abfragen}{src/rest_instance_metadata.sh}
+
 \section{Für die Semesterarbeit verwendete Software}
 \begin{itemize}
-\item JabRef: Verwaltung des Literaturverzeichnisses
-\item Gummi: Latex Editor
+\item JabRef: Verwaltung des Literaturverzeichnisses (BibTeX)
+\item Gummi: LaTeX Editor
 \item AWS CLI: Für das Bereitstellen der AWS Infrastruktur
 \item jq: Für das Filtern von JSON (vor allem von AWS CLI Antworten)
 \item git: Versionsmanagement der Textdateien
