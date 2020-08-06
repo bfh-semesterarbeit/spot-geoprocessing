@@ -1,0 +1,3 @@
+[submodule "latex/semesterarbeit/src/up-and-running-dataprocessing"]
+	path = latex/semesterarbeit/src/up-and-running-dataprocessing
+	url = git@github.com:bfh-semesterarbeit/up-and-running-dataprocessing.git
