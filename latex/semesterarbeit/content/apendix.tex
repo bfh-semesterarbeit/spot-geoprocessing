@@ -22,7 +22,7 @@ EFS an eine EC2-Instanz gemountet und die 3D Daten wurden dorthin kopiert.
 \appendCode{bash}{EFS auf EC2-Instanz mounten}{src/walktrough_ec2_and_efs.sh}
 
 \subsection{Von der Instanz aus abfragen, was ihr Status ist}
-Von der Instanz aus kann via REST API Metadaten der Instanz abgefragt werden. Bezüglich Determinierung einer Spot-Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht.
+Von der Instanz aus kann via REST API Metadaten der Instanz abgefragt werden. Bezüglich Determinierung einer Spot-Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht. Von da an, wo klar ist, dass die Instanz abgestellt werden wird, kann der Zeitpunkt ausgelesen werden.
 \appendCode{bash}{Status der Instanz abfragen}{src/rest_instance_metadata.sh}
 
 \section{Für die Semesterarbeit verwendete Software}

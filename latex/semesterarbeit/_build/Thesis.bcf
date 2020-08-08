@@ -2155,13 +2155,13 @@
     <bcf:citekey order="8">Informatik2010</bcf:citekey>
     <bcf:citekey order="9">Balstroem</bcf:citekey>
     <bcf:citekey order="10">Kehlmann2005</bcf:citekey>
-    <bcf:citekey order="11">Christ2020</bcf:citekey>
-    <bcf:citekey order="12">toposhop2010</bcf:citekey>
-    <bcf:citekey order="13">watson2018</bcf:citekey>
-    <bcf:citekey order="14">technischeschulden2010</bcf:citekey>
-    <bcf:citekey order="15">kanban2010</bcf:citekey>
-    <bcf:citekey order="16">AmazonAWSSpot:1</bcf:citekey>
-    <bcf:citekey order="17">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="11">kanban2010</bcf:citekey>
+    <bcf:citekey order="12">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="13">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="14">Christ2020</bcf:citekey>
+    <bcf:citekey order="15">toposhop2010</bcf:citekey>
+    <bcf:citekey order="16">watson2018</bcf:citekey>
+    <bcf:citekey order="17">technischeschulden2010</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

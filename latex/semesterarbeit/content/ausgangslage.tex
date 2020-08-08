@@ -58,12 +58,26 @@ Daten selbst automatisch publizieren und prüfen könnte.
 
 \subsection{Ist-Zustand der 3D Datenpublikation}
 \subsubsection{Prozess der Publikation}
-\begin{itemize}
-\item Ausfindig machen des Zeitaufwandes pro Update bei uns und bei der IT
-\item Topo an Kogis, Kogis an IT, Kogis an Topo ... 
-\item Bild des Prozesses, der Infra
-\item Manuelles Bereitstellen von EC2 Instanzen
-\end{itemize}
+Das Aufzeigen des Prozesses der Publikation soll helfen einen Überblick der Arbeiten zu erhalten, die erledigt werden müssen, um die 3D Daten im Web zu publizieren. Es bildet den Ist-Zustand ab und erleichtert es mögliche Schritte, die automatisiert werden können, zu identifizieren.
+Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{vom Bereich Topografie}, müssen zurzeit folgende Schritte, die im Anhang TODO referenziert sind, erledigt werden. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.80\textwidth]{ist_zustand}
+	\caption{Arbeitsschritte, die es braucht, um die 3D Daten zu Publizieren}
+	\label{fig:ist_zustand}
+\end{figure}
+
+\begin{enumerate}
+\item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt
+\item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können)
+\item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren}) kopiert\footnote{via \emph{rsync}}
+\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI} bereitzustellen
+\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volume} des Servers
+\item Die Daten auf dem Server via Docker prozessieren\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}
+\item Kopieren der Web-optimierten Daten auf S3
+\item Die Daten zum Testen bereitstellen. Ein Codepen Projekt, dass auf die Tiles zugreift
+\end{enumerate}
 
 \subsection{Aufwand der Prozessierung}
 
