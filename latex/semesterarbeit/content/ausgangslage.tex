@@ -58,8 +58,9 @@ Daten selbst automatisch publizieren und prüfen könnte.
 
 \subsection{Ist-Zustand der 3D Datenpublikation}
 \subsubsection{Prozess der Publikation}
-Das Aufzeigen des Prozesses der Publikation soll helfen einen Überblick der Arbeiten zu erhalten, die erledigt werden müssen, um die 3D Daten im Web zu publizieren. Es bildet den Ist-Zustand ab und erleichtert es mögliche Schritte, die automatisiert werden können, zu identifizieren.
-Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{vom Bereich Topografie}, müssen zurzeit folgende Schritte, die im Anhang TODO referenziert sind, erledigt werden. 
+Das Aufzeigen des Ist-Zustandes der 3D Datenpublikation soll helfen sich einen Überblick, eine Ausgangslage, zu verschaffen. Es bildet die Grundlage, um die Frage zu beantworten, welche Arbeiten erledigt werden müssen, um die 3D Daten im Web zu publizieren? Welche Arbeitsschritte könnten automatisiert werden? 
+
+Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{vom Bereich Topografie}, müssen zurzeit folgende Schritte, die in der Abbildung \ref{fig:ist_zustand} referenziert sind, erledigt werden:
 
 \begin{figure}[H]
 	\centering
@@ -69,19 +70,32 @@ Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{vom Bere
 \end{figure}
 
 \begin{enumerate}
-\item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt
-\item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können)
+\item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
+\item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
 \item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren}) kopiert\footnote{via \emph{rsync}}
-\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI} bereitzustellen
-\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volume} des Servers
-\item Die Daten auf dem Server via Docker prozessieren\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}
-\item Kopieren der Web-optimierten Daten auf S3
-\item Die Daten zum Testen bereitstellen. Ein Codepen Projekt, dass auf die Tiles zugreift
+\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI} bereitzustellen.
+\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volume} des Servers.
+\item Die Daten auf dem Server via Docker prozessieren\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}.
+\item Kopieren der Web-optimierten Daten auf S3.
+\item Die Daten visualisieren, um inhaltlich testen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (href{https://codepen.io}{codepen.io})}, dass auf die 3D Tiles zugreift.
 \end{enumerate}
 
 \subsection{Aufwand der Prozessierung}
+Folgende Schritte sind besonders aufwendig:
+\begin{itemize}
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Zippen (Packen und Entpacken) der Rohdaten nimmt lange.
+\item Es kommt immer mal wieder vor, dass Daten korrupt sind, was zu einer Nachlieferung führt, mit der Gefahr, dass es mit Versionen der Lieferung zu einem Durcheinander kommen könnte.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Prozessierung eine EC2 Instanz mit EFS bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{der Prozessierung} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Nebst der Bemühung der IT, muss auf der Instanz selber anschliessend das eine und andere manuell installiert und konfiguriert werden.
+\end{itemize}
+
 
 
 \subsection{Technologie Stack}
-
+Auflistung der technischen Komponenten:
+\begin{itemize}
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2., 3. und 5.}: Das Komprimieren und Kopieren der Rohdaten erfolgt mit Linux Bordmitteln (\emph{cp}, \emph{rsync}, \emph{tar})
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4. und 7.}: Erfolgen via AWS CLI
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 6.}: Via Docker. Der Container wurde von der Firma Analytical Graphics Inc. \cite{AGI2010} bereitgestellt. Das Tool, dass die Rohdaten in ein Web-Format umwandelt, wird mit Node.js ausgeführt.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 7.}: Ein Projekt, um die Daten im Browser betrachten und inhaltlich Testen zu können, erfolgt über die Webseite codepen.io.
+\end{itemize}
 
