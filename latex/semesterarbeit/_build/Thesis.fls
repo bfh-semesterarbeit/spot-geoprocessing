@@ -541,8 +541,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs9.tfm
 INPUT pictures/spot.png
 INPUT pictures/spot.png
 INPUT pictures/spot.png
-INPUT content/ausgangslage.tex
-INPUT content/ausgangslage.tex
+INPUT content/usecase.tex
+INPUT content/usecase.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT pictures/bfh_3d.png
 INPUT pictures/bfh_3d.png
@@ -551,8 +551,6 @@ INPUT pictures/ist_zustand.png
 INPUT pictures/ist_zustand.png
 INPUT pictures/ist_zustand.png
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
-INPUT content/usecase.tex
-INPUT content/usecase.tex
 INPUT content/architektur.tex
 INPUT content/architektur.tex
 INPUT content/prototyp.tex

@@ -1,19 +1,48 @@
 \section{Architektur}
-Ausfindigmachen von verschiedenen Architekturen
-\subsection{Bewertungskriterien}
-\begin{itemize}
-\item Muss in AWS Cloud
-\item Zugang zu EFS
-\item Automatisierbar sein
-\end{itemize}
-\subsection{Variante 1: Spot}
-Evtl. lässt sich eine Lösung finden ohne EKS zu verwenden
 
-\subsection{Variante 2: Spot mit EKS}
-Spot mit EKS
+\subsection{Analyse des Ist-Zustandes}
+Vor allem beim Setup kann viel automatisiert (eingespart) werden. 
+\begin{itemize}
+\item Cronetab: Zippen und rsync
+\item Cronetab: Run Instance
+\end{itemize}
+
+\subsection{Bewertungskriterien}
+\begin{tabular}{ll}
+    \textbf{Kosten einsparen} & Es darf sicher nicht teurer sein als die bisherige Lösung\\
+    \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben\\
+    \textbf{Einfach} & Jemand, der die Details der Prozessierung nicht kennt, soll diese mit einem minimalen
+    Aufwand aufbauen und vorantreiben können.\\
+    \textbf{Kein Exot} & Der Technologie Stack soll möglichst denjenigen der Microservices entsprechen\\
+\end{tabular}
+
+
+\subsubsection{Prozessing}
+Da die Geodaten mittels Container prozessiert werden ... 
+
+\subsubsection{Variante 1: Direkt auf Spot Instanz}
+\begin{itemize}
+\item Welches base AMI: Ubuntu - weil Wissen da ist, es direkt vom Internet her erreichbar ist...
+\item Ansible oder AMI ? -> Ansible, weil damit weitere Schritte abgedeckt werden können.
+\end{itemize}
+
+
+
+
+\subsubsection{Variante 2: Kubernetes (EKS) auf Spot Instanzen erweitern}
+Spot mit EKS. 
 
 EBook auf meinem Reader: Job und Cronejob
 
-\subsection{Variante 3: AWS Batch}
+\subsubsection{Variante 3: AWS Batch auf Spot Instanzen}
 
 https://aws.amazon.com/de/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/
+
+
+\subsection{Bewertung}
+
+\subsection{Architekturentscheid}
+Rampup vor allem via Ansible und Cronejob
+Ansible und Spot -> Wenn die Zeit noch reicht -> EKS -> Batch
+
+TODO: Skizze
