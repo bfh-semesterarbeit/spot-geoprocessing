@@ -1,6 +1,24 @@
 \section{Architektur}
 
 \subsection{Analyse des Ist-Zustandes}
+\subsubsection{Bereitstellung der Rohdaten und Sicherstellung dessen Qualität}
+Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwand_prozessierung} geht hervor, dass vor allem das Bereitstellen der Rohdaten und das Sicherstellen dessen Qualität aufwändig ist. 
+
+\textbf{Das Bereitstellen der Rohdaten} nimmt aufgrund der Datenmenge\footnote{Weil es sich um mehrere Millionen Dateien handelt} viel Zeit in Anspruch. Hier gäbe es folgende zwei Lösungsansätze:
+\begin{enumerate}
+\item Der Datenlieferant könnte direkt aufs EFS schreiben (Abb. \ref{fig:ist_zustand}, Nr. 5)
+\item Automatischer Prozess via Cronjob oder oder Trigger, der die Kopier-Schritte (Abb. \ref{fig:ist_zustand}, Schritte Abb. \ref{fig:ist_zustand}) regelmässig bereitstellt.
+\end{enumerate}
+
+\textbf{Sicherung der Qualität}
+Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
+häufig erst nach der Publikation entdeckt: Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Idealerweise
+
+\subsubsection{Bereitstellung Infrastruktur fürs Prozessing}
+Die Rohdaten werden via Docker-Image prozessiert. Damit die IT nicht jedes mal gebeten werden muss, Infrastruktur bereitzustellen, muss ein Weg gefunden der die Infrastrukur fürs Prozessing automatisch bereitstellt. 
+
+
+
 Vor allem beim Setup kann viel automatisiert (eingespart) werden. 
 \begin{itemize}
 \item Cronetab: Zippen und rsync
@@ -10,7 +28,7 @@ Vor allem beim Setup kann viel automatisiert (eingespart) werden.
 \subsection{Bewertungskriterien}
 \begin{tabular}{ll}
     \textbf{Kosten einsparen} & Es darf sicher nicht teurer sein als die bisherige Lösung\\
-    \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben\\
+    \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben und so wenig Personal wie möglich beanspruchen.\\
     \textbf{Einfach} & Jemand, der die Details der Prozessierung nicht kennt, soll diese mit einem minimalen
     Aufwand aufbauen und vorantreiben können.\\
     \textbf{Kein Exot} & Der Technologie Stack soll möglichst denjenigen der Microservices entsprechen\\
