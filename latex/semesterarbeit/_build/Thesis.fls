@@ -537,10 +537,6 @@ INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT pictures/bfh_3d.png
 INPUT pictures/bfh_3d.png
 INPUT pictures/bfh_3d.png
-INPUT pictures/ist_zustand.png
-INPUT pictures/ist_zustand.png
-INPUT pictures/ist_zustand.png
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss9.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/rm-lmr9.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/lmmi9.tfm
@@ -548,6 +544,10 @@ INPUT /usr/share/texmf/fonts/tfm/public/lm/lmsy9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbras9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cmbright/cmbrbs9.tfm
+INPUT pictures/ist_zustand.png
+INPUT pictures/ist_zustand.png
+INPUT pictures/ist_zustand.png
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT content/architektur.tex
 INPUT content/architektur.tex
 INPUT content/prototyp.tex

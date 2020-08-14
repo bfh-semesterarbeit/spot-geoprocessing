@@ -4,63 +4,56 @@
 \subsubsection{Bereitstellung der Rohdaten und Sicherstellung dessen Qualität}
 Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwand_prozessierung} geht hervor, dass vor allem das Bereitstellen der Rohdaten und das Sicherstellen dessen Qualität aufwändig ist. 
 
-\textbf{Das Bereitstellen der Rohdaten} nimmt aufgrund der Datenmenge\footnote{Weil es sich um mehrere Millionen Dateien handelt} viel Zeit in Anspruch. Hier gäbe es folgende zwei Lösungsansätze:
+\paragraph{Das Bereitstellen der Rohdaten} nimmt aufgrund der Datenmenge\footnote{Weil es sich um mehrere Millionen Dateien handelt} viel Zeit in Anspruch. Hier gäbe es folgende zwei Lösungsansätze:
 \begin{enumerate}
 \item Der Datenlieferant könnte direkt aufs EFS schreiben (Abb. \ref{fig:ist_zustand}, Nr. 5)
 \item Automatischer Prozess via Cronjob oder oder Trigger, der die Kopier-Schritte (Abb. \ref{fig:ist_zustand}, Schritte Abb. \ref{fig:ist_zustand}) regelmässig bereitstellt.
 \end{enumerate}
 
-\textbf{Sicherung der Qualität}
-Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
-häufig erst nach der Publikation entdeckt: Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Idealerweise
+Wobei der Lösungsansatz simpler und somit weniger fehleranfällig zu sein scheint. Dieser Ansatz kann, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
 
-\subsubsection{Bereitstellung Infrastruktur fürs Prozessing}
-Die Rohdaten werden via Docker-Image prozessiert. Damit die IT nicht jedes mal gebeten werden muss, Infrastruktur bereitzustellen, muss ein Weg gefunden der die Infrastrukur fürs Prozessing automatisch bereitstellt. 
+\paragraph{Sicherung der Qualität:} Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
+häufig erst nach der Publikation entdeckt. Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Da keine inhaltliche Prüfung der Daten gemacht werden kann, könnte man sich überlegen, wie die Daten sonst noch geprüft werden könnten.
 
+\subsubsection{Bereitstellung der Infrastruktur für die Prozessierung}
+Die Rohdaten werden via Docker Image prozessiert. Jedes Mal wenn das Image fürs Prozessieren ausgeführt werden soll, muss die IT gebeten werden die nötige Infrastruktur bereitzustellen. Idealerweise findet sich eine Lösung, die diesen Schritt überflüssig macht.
 
-
-Vor allem beim Setup kann viel automatisiert (eingespart) werden. 
-\begin{itemize}
-\item Cronetab: Zippen und rsync
-\item Cronetab: Run Instance
-\end{itemize}
 
 \subsection{Bewertungskriterien}
-\begin{tabular}{ll}
-    \textbf{Kosten einsparen} & Es darf sicher nicht teurer sein als die bisherige Lösung\\
-    \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben und so wenig Personal wie möglich beanspruchen.\\
-    \textbf{Einfach} & Jemand, der die Details der Prozessierung nicht kennt, soll diese mit einem minimalen
-    Aufwand aufbauen und vorantreiben können.\\
-    \textbf{Kein Exot} & Der Technologie Stack soll möglichst denjenigen der Microservices entsprechen\\
+\begin{tabular}{p{0.3\textwidth}p{0.7\textwidth}}
+    \textbf{Kosten einsparen} & Änderungen des Prozesses sollen nicht teurer sein, als die bisherige Lösung\\
+    \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben und dadurch so wenig Personalaufwand wie möglich beanspruchen.\\
+    \textbf{Einfach} & Ein neuer Mitarbeiter soll die Lösung rasch verstehen und warten können.\\
+    \textbf{Bestehende Technologie} & Obwohl der Anwendungsfall anders ist, soll der Technologie Stack möglichst demjenigen der Microservices entsprechen\\
 \end{tabular}
 
+\subsection{Architekturentscheid}
+Für den Architekturentscheid wurde auf eine Entscheidungsmatrix verzichtet. Dies Aufgrund der grossen Auswahl und der vielen Entscheidungen, die getroffen werden mussten. Die oben erwähnten Kriterien wurden in der Entscheidungsfindung mit einbezogen und weitere Argumente sind in qualitativer Form festgehalten:
 
-\subsubsection{Prozessing}
-Da die Geodaten mittels Container prozessiert werden ... 
+\subsubsection{Angebote für die Prozessierung}
+Um Geodaten mit AWS Spot Instanzen zu prozessieren, hat der Autor drei Möglichkeiten identifiziert: \emph{Direkt auf der Spot Instanz}, \emph{Kubernetes (EKS)} und \emph{AWS Batch}. Gerne hätte der Autor alle drei Lösungen als POC weiterverfolgt, aber die Zeit dazu reichte leider nicht. Aus diesem Grund beschränkt sich der Autor lediglich auf eine Beschreibung der drei Möglichkeiten. Wobei die erste Möglichkeit als POC umgesetzt werden wird.
 
-\subsubsection{Variante 1: Direkt auf Spot Instanz}
+\paragraph{Direkt auf Spot Instanz}
+Diese Möglichkeit bedingt nur geringe Anpassungen, weil es im Prinzip eine EC2 Instanz ist; mit dem Nachteil, dass diese jederzeit durch eine andere ersetzt werden könnte.
+
 \begin{itemize}
-\item Welches base AMI: Ubuntu - weil Wissen da ist, es direkt vom Internet her erreichbar ist...
-\item Ansible oder AMI ? -> Ansible, weil damit weitere Schritte abgedeckt werden können.
+\item Kein eigenes AMI, aber eine Konfiguration: TODO: Slides von Vorlesung mit Pro - Contra
+\item Ubuntu Base AMI, weil bereits das bestehende AMI auf Ubuntu war und wir sowieso mit Debian und dessen Derivaten arbeiten.
 \end{itemize}
 
 
+\paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}
+TODO: Weil die Microservices in Zukunft auf EKS laufen werden, wäre es sicher ein Möglichkeit, abzuklären, inwiefern sich ein Dataprozessing in dieser Umgebung einrichten lässt. In der Literatur hat der Autor folgende Elemente gefunden.
 
+\begin{itemize}
+\item Job
+\item CronJob
+\item Eigenes ReplicaSet?
+\end{itemize}
 
-\subsubsection{Variante 2: Kubernetes (EKS) auf Spot Instanzen erweitern}
-Spot mit EKS. 
+EBook auf meinem Reader: Job und CronJob aber auch Kubernetes on AWS S. 88
 
-EBook auf meinem Reader: Job und Cronejob
-
-\subsubsection{Variante 3: AWS Batch auf Spot Instanzen}
-
+\paragraph{AWS Batch auf Spot Instanzen}
+Diese Möglichkeit wäre wohl die Naheliegendste, weil AWS Batch für genau diese Art von Aufgaben gebaut wurde. Im Internet hat der Autor einen schönes Beispiel gefunden, wie sich AWS Batch einsetzen lässt.
 https://aws.amazon.com/de/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/
 
-
-\subsection{Bewertung}
-
-\subsection{Architekturentscheid}
-Rampup vor allem via Ansible und Cronejob
-Ansible und Spot -> Wenn die Zeit noch reicht -> EKS -> Batch
-
-TODO: Skizze

@@ -56,6 +56,17 @@ vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
 Daten selbst automatisch publizieren und prüfen könnte.
 
+Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob anstelle von EC2 direkt Spot Instanzen für die Prozessierung verwendet werden können und wie deren Einsatz aussehen könnte.
+
+\subsubsection{Spot Instanzen}
+TODO: Theorie - was sind Spot Instanzen und wie stehen diese im Verhältnis zu Problemstellung? Wie soll damit umgegangen werden, dass die Instanz jederzeit verschwinden könnte?
+\begin{itemize}
+\item REST Abfrage
+\item Cloud Watch
+\item Marke Eigenbau für diesen Use Case
+\end{itemize}
+
+
 \subsection{Ist-Zustand der 3D Datenpublikation}
 \subsubsection{Prozess der Publikation}
 Das Aufzeigen des Ist-Zustandes der 3D Datenpublikation soll helfen sich einen Überblick, eine Ausgangslage, zu verschaffen. Es bildet die Grundlage, um die Frage zu beantworten, welche Arbeiten erledigt werden müssen, um die 3D Daten im Web zu publizieren? Welche Arbeitsschritte könnten automatisiert werden? 
@@ -98,6 +109,4 @@ Auflistung der technischen Komponenten:
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 7.}: Ein Projekt, um die Daten im Browser betrachten und inhaltlich Testen zu können, erfolgt über die Webseite codepen.io.
 \end{itemize}
 
-\subsection{Abgrenzung}
-Einerseits soll dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob anstelle von EC2 direkt Spot Instanzen für die Prozessierung verwendet werden können und wie deren Einsatz aussehen könnte.
 
