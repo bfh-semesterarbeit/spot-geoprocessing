@@ -38,9 +38,9 @@ Zu den Lanschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D.
 	\label{fig:bfh_3d}
 \end{figure}
 
-Seit dem Erfolg der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und punkto Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
+Seit der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und punkto Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
 
-Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}}. Aber früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
+Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall für positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}}. Früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
 
 \section{Der Use Case}
 \subsection{Problemstellung}
@@ -56,10 +56,12 @@ vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
 Daten selbst automatisch publizieren und prüfen könnte.
 
-Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob anstelle von EC2 direkt Spot Instanzen für die Prozessierung verwendet werden können und wie deren Einsatz aussehen könnte.
+Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Prozessierung Budget Instanzen\footnote{Amazon Spot Instanzen.} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen} verwendet werden können und wie deren Einsatz aussehen könnte.
 
-\subsubsection{Spot Instanzen}
-TODO: Theorie - was sind Spot Instanzen und wie stehen diese im Verhältnis zu Problemstellung? Wie soll damit umgegangen werden, dass die Instanz jederzeit verschwinden könnte?
+\subsubsection{Budget Instanzen}
+
+TODO: Theorie - was sind Spot Budget Instanzen? und wie stehen diese im Verhältnis zu Problemstellung? Wie soll damit umgegangen werden, dass die Instanz jederzeit verschwinden könnte?
+
 \begin{itemize}
 \item REST Abfrage
 \item Cloud Watch

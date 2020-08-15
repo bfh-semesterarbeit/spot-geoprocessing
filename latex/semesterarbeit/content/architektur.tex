@@ -24,23 +24,21 @@ Die Rohdaten werden via Docker Image prozessiert. Jedes Mal wenn das Image fürs
     \textbf{Kosten einsparen} & Änderungen des Prozesses sollen nicht teurer sein, als die bisherige Lösung\\
     \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben und dadurch so wenig Personalaufwand wie möglich beanspruchen.\\
     \textbf{Einfach} & Ein neuer Mitarbeiter soll die Lösung rasch verstehen und warten können.\\
-    \textbf{Bestehende Technologie} & Obwohl der Anwendungsfall anders ist, soll der Technologie Stack möglichst demjenigen der Microservices entsprechen\\
+    \textbf{Bestehende Technologie} & Obwohl der Anwendungsfall anders ist, soll der Technologie Stack möglichst demjenigen der Microservices entsprechen.\\
 \end{tabular}
 
 \subsection{Architekturentscheid}
-Für den Architekturentscheid wurde auf eine Entscheidungsmatrix verzichtet. Dies Aufgrund der grossen Auswahl und der vielen Entscheidungen, die getroffen werden mussten. Die oben erwähnten Kriterien wurden in der Entscheidungsfindung mit einbezogen und weitere Argumente sind in qualitativer Form festgehalten:
+Für den Architekturentscheid wurde auf eine Entscheidungsmatrix verzichtet. Dies Aufgrund der grossen Auswahl und der vielen Entscheidungen, die getroffen werden mussten. Die oben erwähnten Kriterien wurden in der Entscheidungsfindung mit einbezogen und weitere Argumente werden ausgeführt:
 
-\subsubsection{Angebote für die Prozessierung}
-Um Geodaten mit AWS Spot Instanzen zu prozessieren, hat der Autor drei Möglichkeiten identifiziert: \emph{Direkt auf der Spot Instanz}, \emph{Kubernetes (EKS)} und \emph{AWS Batch}. Gerne hätte der Autor alle drei Lösungen als POC weiterverfolgt, aber die Zeit dazu reichte leider nicht. Aus diesem Grund beschränkt sich der Autor lediglich auf eine Beschreibung der drei Möglichkeiten. Wobei die erste Möglichkeit als POC umgesetzt werden wird.
+\subsubsection{Prozessierung auf Spot Instanzen}
+Um Geodaten mit AWS Spot Instanzen zu prozessieren, hat der Autor drei Möglichkeiten identifiziert: \emph{Direkt auf der Spot Instanz}, \emph{Kubernetes (EKS)} und \emph{AWS Batch}. Gerne hätte der Autor alle drei Lösungen als POC weiterverfolgt, aber die Zeit dazu reichte leider nicht. Aus diesem Grund beschränkt sich der Autor lediglich auf eine Beschreibung der drei Möglichkeiten. Wobei die erste Möglichkeit als POC umgesetzt wurde.
 
-\paragraph{Direkt auf Spot Instanz}
-Diese Möglichkeit bedingt nur geringe Anpassungen, weil es im Prinzip eine EC2 Instanz ist; mit dem Nachteil, dass diese jederzeit durch eine andere ersetzt werden könnte.
+\paragraph{Direkt auf einer Spot Instanz:}
+Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Prozessierung, weil die Daten im Prinzip wie bisher auf EC2 Instanz prozessiert werden; mit dem Nachteil, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
 
-\begin{itemize}
-\item Kein eigenes AMI, aber eine Konfiguration: TODO: Slides von Vorlesung mit Pro - Contra
-\item Ubuntu Base AMI, weil bereits das bestehende AMI auf Ubuntu war und wir sowieso mit Debian und dessen Derivaten arbeiten.
-\end{itemize}
+Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil das Prozessing bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas das funktioniert zu ändern. 
 
+Bei der Provisionierung\footnote{Bereitstellung.} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} deklatrativ festgehalten wird. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
 
 \paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}
 TODO: Weil die Microservices in Zukunft auf EKS laufen werden, wäre es sicher ein Möglichkeit, abzuklären, inwiefern sich ein Dataprozessing in dieser Umgebung einrichten lässt. In der Literatur hat der Autor folgende Elemente gefunden.

@@ -19,7 +19,7 @@ aws secretsmanager list-secrets --endpoint-url https://vpce-006949cd7fb8f6852-lv
 node --max-old-space-size=20000 node_modules/.bin/roadhouse -i input -o output --clear-normals --face-normals --max-tiles 1000 -r UUID -r DATUM_AENDERUNG -r DATUM_ERSTELLUNG -r ERSTELLUNG_JAHR -r ERSTELLUNG_MONAT -r REVISION_JAHR -r REVISION_MONAT -r GRUND_AENDERUNG -r HERKUNFT -r HERKUNFT_JAHR -r HERKUNFT_MONAT -r OBJEKTART -r ORIGINAL_HERKUNFT -r GEBAEUDE_NUTZUNG -r Longitude -r Latitude -r Height
 
 
-node --max-old-space-size=20000 node_modules/.bin/roadhouse -i /var/app/input -o /var/app/output -db /var/app/db --clear-normals --face-normals --max-tiles 1000 -r UUID -r DATUM_AENDERUNG -r DATUM_ERSTELLUNG -r ERSTELLUNG_JAHR -r ERSTELLUNG_MONAT -r REVISION_JAHR -r REVISION_MONAT -r GRUND_AENDERUNG -r HERKUNFT -r HERKUNFT_JAHR -r HERKUNFT_MONAT -r OBJEKTART -r ORIGINAL_HERKUNFT -r GEBAEUDE_NUTZUNG -r Longitude -r Latitude -r Height
+node --max-old-space-size=20000 node_modules/.bin/roadhouse -i /var/app/input -o /var/app/output --db /var/app/db --clear-normals --face-normals --max-tiles 1000 -r UUID -r DATUM_AENDERUNG -r DATUM_ERSTELLUNG -r ERSTELLUNG_JAHR -r ERSTELLUNG_MONAT -r REVISION_JAHR -r REVISION_MONAT -r GRUND_AENDERUNG -r HERKUNFT -r HERKUNFT_JAHR -r HERKUNFT_MONAT -r OBJEKTART -r ORIGINAL_HERKUNFT -r GEBAEUDE_NUTZUNG -r Longitude -r Latitude -r Height
 
 docker run -it -v /home/ubuntu/data/input/:/var/app/input/ -v /home/ubuntu/data/output/:/var/app/output/ -v /home/ubuntu/data/db:/var/app/db -v /home/ubuntu/data/agi_log/:/var/app/log c6105ce43be3
 
