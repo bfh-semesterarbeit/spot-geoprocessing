@@ -539,6 +539,9 @@ INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso8.tfm
 INPUT pictures/bfh_3d.png
 INPUT pictures/bfh_3d.png
 INPUT pictures/bfh_3d.png
+INPUT pictures/spot.png
+INPUT pictures/spot.png
+INPUT pictures/spot.png
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss9.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/rm-lmr9.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/lmmi9.tfm
@@ -554,6 +557,9 @@ INPUT content/architektur.tex
 INPUT content/architektur.tex
 INPUT content/prototyp.tex
 INPUT content/prototyp.tex
+INPUT pictures/poc_zustand.png
+INPUT pictures/poc_zustand.png
+INPUT pictures/poc_zustand.png
 INPUT content/erkenntnisse.tex
 INPUT content/erkenntnisse.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd

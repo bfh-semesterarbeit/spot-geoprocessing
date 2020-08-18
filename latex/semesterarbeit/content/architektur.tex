@@ -38,7 +38,7 @@ Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Prozessierung,
 
 Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil das Prozessing bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas das funktioniert zu ändern. 
 
-Bei der Provisionierung\footnote{Bereitstellung.} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} deklatrativ festgehalten wird. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
+Bei der Provisionierung\footnote{Bereitstellung.} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
 
 \paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}
 TODO: Weil die Microservices in Zukunft auf EKS laufen werden, wäre es sicher ein Möglichkeit, abzuklären, inwiefern sich ein Dataprozessing in dieser Umgebung einrichten lässt. In der Literatur hat der Autor folgende Elemente gefunden.
