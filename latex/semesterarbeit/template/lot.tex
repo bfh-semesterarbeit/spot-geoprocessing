@@ -1,23 +1,21 @@
 \setlength{\parskip}{0pt}
 
 \makeatletter
-\renewcommand{\listoffigures}{%
+\renewcommand{\listoftables}{%
 	\vspace*{0em}% reduce space before
-	\noindent{\Large\listfigurename\par}%
+	\noindent{\Large\listtablename\par}%
 	\vspace{2mm}% space between title and rule
 	\hrule
 	\vspace{2mm}% space below rule
-	\@starttoc{lof}
+	\@starttoc{lot}
 	\vspace{4mm}
 	\hrule
 }
 
 \makeatother
-\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
 
-\listoffigures\label{lof}
+\listoftables\label{lot}
 \setlength{\parskip}{10pt}
 
-\hspace*{4cm}
-
-%\pagebreak
+\pagebreak

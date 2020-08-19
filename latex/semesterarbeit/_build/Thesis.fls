@@ -511,6 +511,11 @@ INPUT _build/Thesis.lof
 INPUT _build/Thesis.lof
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso10.tfm
 OUTPUT _build/Thesis.lof
+INPUT template/lot.tex
+INPUT template/lot.tex
+INPUT _build/Thesis.lot
+INPUT _build/Thesis.lot
+OUTPUT _build/Thesis.lot
 INPUT content/einfuehrung.tex
 INPUT content/einfuehrung.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss8.tfm

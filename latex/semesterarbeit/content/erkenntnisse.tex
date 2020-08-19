@@ -10,19 +10,20 @@ Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Per
 \paragraph{Einsparungen Spot im Vergleich zu On-Demand}
 Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des POCs aufgelistet. Prozessierung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
 
+\begin{table}[!htbp]
 \begin{center}
 \begin{tabular}{| c | c | c |}
     \hline
-	\textbf{Pro Stunde} & \textbf{On-Demand} & \textbf{Spot}\\
+	\textbf{Rechenzeit} & \textbf{On-Demand} & \textbf{Spot}\\
 	\hline
-	 1h & 0.29 \$ & 1.19 \$\\
+	 \textbf{Pro Stunde} & 0.29 \$ & 1.19 \$\\
 	\hline
-	\textbf{Gesamtrechenzeit} & \textbf{On-Demand} & \textbf{Spot}\\
-	\hline
-	 18 h & 21.42 \$ & 5.22 \$\\
+	 \textbf{Total: 18 h} & 21.42 \$ & 5.22 \$\\
 	\hline
 \end{tabular}
+\caption{\label{tab:price_difference}Relativ betrachtet ist das Sparpotential enorm: 76\%}
 \end{center}
+\end{table}
 
 Schaut man die Kosten relativ an, dann ist das Sparpotential enorm: 76\%! In absoluten Zahlen erscheint das Sparpotential für einen einzelnen Prozessierungsauftrag nicht riesig: ca. 15 \$. Dazu muss allerdings ergänzt werden, dass die Prozessierungzeit durch die Automatisierung verkürzt wurde. Ausserdem werden jährlich mehrere 3D Updates in Auftrag gegeben. Der grösste davon ist das Update des 3D Terrains.
 
