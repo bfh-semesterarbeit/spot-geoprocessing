@@ -36,9 +36,10 @@ Um Geodaten mit AWS Spot Instanzen zu prozessieren, hat der Autor drei Möglichk
 \paragraph{Direkt auf einer Spot Instanz:}
 Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Prozessierung, weil die Daten im Prinzip wie bisher auf EC2 Instanz prozessiert werden; mit dem Nachteil, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
 
-Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil das Prozessing bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas das funktioniert zu ändern. 
+Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil das Prozessing bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas das funktioniert zu ändern. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Prozessierung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut stemmen.
 
-Bei der Provisionierung\footnote{Bereitstellung.} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
+Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
+Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche Initialisierung wurde an \emph{Ansible} übergeben. 
 
 \paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}
 TODO: Weil die Microservices in Zukunft auf EKS laufen werden, wäre es sicher ein Möglichkeit, abzuklären, inwiefern sich ein Dataprozessing in dieser Umgebung einrichten lässt. In der Literatur hat der Autor folgende Elemente gefunden.
@@ -54,4 +55,3 @@ EBook auf meinem Reader: Job und CronJob aber auch Kubernetes on AWS S. 88
 \paragraph{AWS Batch auf Spot Instanzen}
 Diese Möglichkeit wäre wohl die Naheliegendste, weil AWS Batch für genau diese Art von Aufgaben gebaut wurde. Im Internet hat der Autor einen schönes Beispiel gefunden, wie sich AWS Batch einsetzen lässt.
 https://aws.amazon.com/de/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/
-

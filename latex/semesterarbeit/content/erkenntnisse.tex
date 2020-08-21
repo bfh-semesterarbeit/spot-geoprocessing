@@ -1,8 +1,11 @@
 \section{Evaluation}
 \subsection{Erfahrungen}
-Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH BERN: Bsp. die Vorlesungen Architektur, IaaS, PaaS, Docker und Kubernetes} haben den Autor motiviert, die komplette Infrastruktur für den POC selber in einem eigenen AWS Testaccount aufzubauen. Da die Infrastruktur und das Processing deklarativ festgehalten wurden, kann ein Grossteil dieses Codes auch im Account des Betriebes ohne grosse Anpassungen wiederverwendet werden.
+Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH Bern: Bsp. die Vorlesungen Architektur, IaaS, PaaS, Docker und Kubernetes} und das günstige Angebot von AWS haben den Autor motiviert, die komplette Infrastruktur für den Prototypen selber in einem eigenen AWS Testaccount aufzubauen. Da die Infrastruktur und das Processing deklarativ festgehalten wurden, kann ein Grossteil dieses Codes auch im Account des Betriebes ohne grosse Anpassungen wiederverwendet werden.
 
 Im Betrieb hätte das Team und die IT Abteilung das nötige Know-How gehabt, um mit dieser Arbeit weiter zu kommen, als es jetzt der Fall ist. Aber der Autor hat sich bewusst dazu entschieden, die Arbeit möglichst selbständig zu realisieren und  diese Ressource zu schonen, indem er sie so wenig wie möglich genutzt hat. Es war für den Autor schon nur eine Hilfe, zu Wissen, dass die Möglichkeit einer Unterstützung da war. Dies führte dazu, dass der Autor Momente der Ratlosigkeit erleben musste\ref{har:perplexity}. Was nicht weiter schlimm war, da \textit{"Perplexity is the beginning of knowledge"} \autocite[33]{CloudNativ:1}.
+
+Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Aufgrund der gemounteten SSD Festplatte musste der Pool der freien Instanzen auf die Availability-Zone, in welcher sich die Festplatte befindet, eingeschränkt werden. Der Autor war darüber erstaunt, dass ihm während der ganzen Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde; dies trotz Beschränkung auf eine Availability-Zone.
+
 
 \subsection{Wirtschaftlichkeit}
 \paragraph{Personalstunden}
@@ -28,7 +31,10 @@ Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die E
 Schaut man die Kosten relativ an, dann ist das Sparpotential enorm: 76\%! In absoluten Zahlen erscheint das Sparpotential für einen einzelnen Prozessierungsauftrag nicht riesig: ca. 15 \$. Dazu muss allerdings ergänzt werden, dass die Prozessierungzeit durch die Automatisierung verkürzt wurde. Ausserdem werden jährlich mehrere 3D Updates in Auftrag gegeben. Der grösste davon ist das Update des 3D Terrains.
 
 \subsection{Kritische Punkte}
+TODO: 
 Bezüglich Authentifizierung hat der POC Technische Schulden.
+
+Schön wäre, wenn der Prozess selber in viele kleine Teile aufgeteilt werden könnte. Doch zurzeit ist das Tool eine einzige Backbox in einem Container und es funktionieren nur vollständige Publikationen und keine Inkrementellen. 
 
 
 \section{Ausblick}

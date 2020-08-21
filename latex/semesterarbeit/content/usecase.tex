@@ -4,7 +4,7 @@ Hier werden das Arbeitsumfeld und die Aufgaben beschrieben, aus denen sich die P
 \subsection{swisstopo bei AWS}
 Es liegt auf der Hand, dass die swisstopo in ihrer Rolle als \emph{Geoinformationszentrum} auf Cloud Computing setzt. Die swisstopo nutzt Cloud Computing mit AWS\footnote{Amazon Web Services} seit mehr als 10 Jahren für den Betrieb des Geoportal des Bundes.
  
-\textit{"Mit der BGDI\footnote{Bundesgeodateninfrastruktur: Viewer und andere Services} unter AWS können wir derzeit ca. eine Million Internetbenutzer pro Monat bedienen. Dank AWS können wir die zur Zuordnung neuer Server benötigte Zeit erheblich verkürzen und unseren Fokus auf echte Kundenanforderungen verstärken."} \cite{Christ2020}.
+\textit{"Mit der BGDI\footnote{Bundesgeodateninfrastruktur: Viewer und andere Services.} unter AWS können wir derzeit ca. eine Million Internetbenutzer pro Monat bedienen. Dank AWS können wir die zur Zuordnung neuer Server benötigte Zeit erheblich verkürzen und unseren Fokus auf echte Kundenanforderungen verstärken."} \cite{Christ2020}.
 
 
 \subsection{Publikation von Geodaten}
@@ -56,24 +56,28 @@ vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
 Daten selbst automatisch publizieren und prüfen könnte.
 
-Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Prozessierung Budget Instanzen\footnote{Amazon Spot Instanzen.} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen} verwendet werden können und wie deren Einsatz aussehen könnte.
+Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Prozessierung Budget Instanzen\footnote{Amazon Spot Instanzen} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen.} verwendet werden können und wie deren Einsatz aussehen könnte.
 
 \subsubsection{Budget Instanzen}
+Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-Instances können Sie die Vorteile nicht genutzter EC2-Kapazitäten in der AWS Cloud nutzen. Spot-Instances sind mit einem Rabatt von bis zu\\ 90 \% im Vergleich zum On-Demand-Preis verfügbar. Sie können Spot-Instances für diverse statuslose, fehlertolerante und flexible Anwendungen verwenden. Dazu zählen unter anderem Big-Data-Anwendungen, auf Containern ausgeführte Workloads, CI/CD, Webserver-Anwendungen, HPC-Anwendungen (High-Performance Computing) sowie Test- und Entwicklungs-Workloads."} \cite{AmazonAWSSpot:1}.
 
-TODO: Theorie - was sind Spot Budget Instanzen? und wie stehen diese im Verhältnis zu Problemstellung? Wie soll damit umgegangen werden, dass die Instanz jederzeit verschwinden könnte?
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.90\textwidth]{spot}
+	\includegraphics[width=.70\textwidth]{spot}
 	\caption{So funktioniert das Ausleihen von Bugdet (SPOT) Instanzen}
 	\label{fig:spot}
 \end{figure}
 
-\begin{itemize}
-\item REST Abfrage
-\item Cloud Watch
-\item Marke Eigenbau für diesen Use Case
-\end{itemize}
+Das Verkaufsargument \emph{90 \%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Hacken, dass einem die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
+
+Möchte man die EC2 Spot Instanzen für Geodatenprozessierung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
+
+Wie auf der Abbildung \ref{fig:spot} dargestellt, kann das Verhalten der Instanz bei einem Interrupt\footnote{Wenn Amazon die Spot Instanz für einen anderen Zweck beanspruchen möchte, die wegnimmt.} definiert werden. Es besteht dabei sogar die Möglichkeit eines \emph{Hibernate}, dass der Zustand des RAMs auf der Festplatte persistiert wird.
+
+Diese 2 minütige Vorankündigung eines Intterupts kann auch via RESTful Abfrage\footnote{EC2 Spot Instance Interruption Notice, eine HTTP Abfrage: Im Anhang \ref{appendix:restful} hat es ein Beispiel dazu.} von der Instanz aus abgefragt werden.
+
+Diese Vorankündigung lässt sich auch via AWS CLI abfragen. In einem grösseren Setup könnte das Signal der Vorankündigung auch mit dem AWS Überwachungstool \emph{CloudWatch} verarbeitet werden.
 
 
 \subsection{Ist-Zustand der 3D Datenpublikation}

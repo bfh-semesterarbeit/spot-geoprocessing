@@ -2159,8 +2159,10 @@
     <bcf:citekey order="11">toposhop2010</bcf:citekey>
     <bcf:citekey order="12">watson2018</bcf:citekey>
     <bcf:citekey order="13">technischeschulden2010</bcf:citekey>
-    <bcf:citekey order="14">AGI2010</bcf:citekey>
-    <bcf:citekey order="15">CloudNativ:1</bcf:citekey>
+    <bcf:citekey order="14">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="15">AGI2010</bcf:citekey>
+    <bcf:citekey order="16">FreeTier2020</bcf:citekey>
+    <bcf:citekey order="17">CloudNativ:1</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
