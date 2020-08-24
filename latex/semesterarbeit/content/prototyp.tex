@@ -16,9 +16,12 @@ Weitere Schritte folgten. Die Realisierung des Prototypen wird in den folgenden 
 \subsubsection{Der Publikationsvorgang als Code}
 Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht via einem neuen AMI.}, war es eine fliessende Entscheidung auch gleich Ansible für den Publikationsvorgang zu verwenden. Aus der Abbildung \ref{fig:ist_zustand} ist ersichtlich, dass Ansible eine zentrale Rolle im Publikationsvorgang einnimmt (Nr. 3). 
 
+
+
+
+\subsubsection{Handling der Interrupts}
 Sämtliche Schritte werden via Ansible verwaltet und sobald ein Schritt erledigt wurde, hält Ansible dies auf dem gemounteten EFS Volumen in einer Texdatei fest.
 
-\paragraph{Handling der Interrupts}
 Falls es zu einem Interrupt kommen sollte, wird von der Spot Flotte die nächste Instanz bereitgestellt und Ansible macht bei dem Schritt weiter, der zuletzt in der Textdatei festgehalten wurde (Abbildung \ref{fig:ist_zustand}, Nr. 5).
 
 
