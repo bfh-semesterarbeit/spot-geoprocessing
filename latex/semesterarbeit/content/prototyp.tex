@@ -9,15 +9,17 @@ Weitere Schritte folgten. Die Realisierung des Prototypen wird in den folgenden 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.90\textwidth]{poc_zustand}
-	\caption{Geodatenverarbeitung mit SPOT Instanzen}
+	\caption{Geodatenprozessierung mit SPOT Instanzen}
 	\label{fig:ist_zustand}
 \end{figure}
 
 \subsubsection{Der Publikationsvorgang als Code}
-Aus der Abbildung \ref{fig:ist_zustand} ist ersichtlich, dass Ansible eine zentrale Rolle im Publikationsprozess einnimmt. 
+Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht via einem neuen AMI.}, war es eine fliessende Entscheidung auch gleich Ansible für den Publikationsvorgang zu verwenden. Aus der Abbildung \ref{fig:ist_zustand} ist ersichtlich, dass Ansible eine zentrale Rolle im Publikationsvorgang einnimmt (Nr. 3). 
 
-\subsubsection{Handling der Interrupts}
+Sämtliche Schritte werden via Ansible verwaltet und sobald ein Schritt erledigt wurde, hält Ansible dies auf dem gemounteten EFS Volumen in einer Texdatei fest.
 
+\paragraph{Handling der Interrupts}
+Falls es zu einem Interrupt kommen sollte, wird von der Spot Flotte die nächste Instanz bereitgestellt und Ansible macht bei dem Schritt weiter, der zuletzt in der Textdatei festgehalten wurde (Abbildung \ref{fig:ist_zustand}, Nr. 5).
 
 
 \subsection{Testen}
@@ -30,5 +32,5 @@ Aus der Abbildung \ref{fig:ist_zustand} ist ersichtlich, dass Ansible eine zentr
 
 \paragraph{Real Case Szenario}
 
-Der komplette Rohdatensatz, alle Gebäude der Schweiz, wurde verarbeitet. Das Resultat kann vorläufig\footnote{Bis am 1. November 2020.} hier betrachtet werden:
+Der komplette Rohdatensatz, alle Gebäude der Schweiz, wurde prozessiert. Das Resultat kann vorläufig\footnote{Bis am 1. November 2020} hier betrachtet werden:
 \href{https://codepen.io/rebert/pen/ExKZmmE}{https://codepen.io/rebert/pen/ExKZmmE} Wobei nur die Gebäude vom S3 Testbucket kommen.
