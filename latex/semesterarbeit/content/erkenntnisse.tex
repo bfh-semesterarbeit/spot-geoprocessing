@@ -9,9 +9,9 @@ Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads}
 
 \subsection{Wirtschaftlichkeit}
 \paragraph{Personalstunden}
-Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team} weg. Vor allem diese Kosten rechnen sich. Die Prozessierungsschritte sind im Code abgebildet, was Fehleranfälligkeit kleiner macht, als wenn Bash-Befehle aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle\footnote{In der AWS eine sogenannter IAM-Benutzer} eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
+Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team} weg. Vor allem diese Kosten rechnen sich. Die Verarbeitungsschritte sind im Code abgebildet, was Fehleranfälligkeit kleiner macht, als wenn Bash-Befehle aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle\footnote{In der AWS eine sogenannter IAM-Benutzer} eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
 \paragraph{Einsparungen Spot im Vergleich zu On-Demand}
-Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des POCs aufgelistet. Prozessierung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
+Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des POCs aufgelistet. Verarbeitung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -28,7 +28,7 @@ Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die E
 \end{center}
 \end{table}
 
-Schaut man die Kosten relativ an, dann ist das Sparpotential enorm: 76\%! In absoluten Zahlen erscheint das Sparpotential für einen einzelnen Prozessierungsauftrag nicht riesig: ca. 15 \$. Dazu muss allerdings ergänzt werden, dass die Prozessierungzeit durch die Automatisierung verkürzt wurde. Ausserdem werden jährlich mehrere 3D Updates in Auftrag gegeben. Der grösste davon ist das Update des 3D Terrains.
+Schaut man die Kosten relativ an, dann ist das Sparpotential enorm: 76\%! In absoluten Zahlen erscheint das Sparpotential für einen einzelnen Verarbeitungsauftrag nicht riesig: ca. 15 \$. Dazu muss allerdings ergänzt werden, dass die Verarbeitungszeit durch die Automatisierung verkürzt wurde. Ausserdem werden jährlich mehrere 3D Updates in Auftrag gegeben. Der grösste davon ist das Update des 3D Terrains.
 
 \subsection{Kritische Punkte}
 TODO: 

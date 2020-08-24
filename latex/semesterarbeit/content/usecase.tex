@@ -44,19 +44,19 @@ Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall f
 
 \section{Der Use Case}
 \subsection{Problemstellung}
-Es ist der swisstopo schon lange ein Anliegen, dass die Publikationsprozesse von Geodaten optimiert werden
+Es ist der swisstopo schon lange ein Anliegen, dass die Publikationvorgänge von Geodaten optimiert werden
 sollen. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
 
 Besonders aufwändig erweist sich zurzeit die Publikation von 3D Daten. Die manuelle Publikation
 der 3D Daten benötigt eigene Tools, die auf einem performanten und somit teuren Rechner laufen
 müssen. Ausserdem erfordert die Bereitstellung einen hohen Koordinationsaufwand zwischen der
 Infrastruktur und der Entwicklung. Dabei passiert es, dass Mängel in den 3D Daten erst nach
-beendeter Webpublikation bemerkt werden; und der ganze Publikationsprozess muss wieder von
+beendeter Webpublikation bemerkt werden; und der ganze Publikationsvorgang muss wieder von
 vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
 Daten selbst automatisch publizieren und prüfen könnte.
 
-Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Prozessierung Budget Instanzen\footnote{Amazon Spot Instanzen} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen.} verwendet werden können und wie deren Einsatz aussehen könnte.
+Einerseits soll in dieser Arbeit mittels POC\footnote{Prove of Concept} aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Verarbeitung Budget Instanzen\footnote{Amazon Spot Instanzen} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen.} verwendet werden können und wie deren Einsatz aussehen könnte.
 
 \subsubsection{Budget Instanzen}
 Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-Instances können Sie die Vorteile nicht genutzter EC2-Kapazitäten in der AWS Cloud nutzen. Spot-Instances sind mit einem Rabatt von bis zu\\ 90 \% im Vergleich zum On-Demand-Preis verfügbar. Sie können Spot-Instances für diverse statuslose, fehlertolerante und flexible Anwendungen verwenden. Dazu zählen unter anderem Big-Data-Anwendungen, auf Containern ausgeführte Workloads, CI/CD, Webserver-Anwendungen, HPC-Anwendungen (High-Performance Computing) sowie Test- und Entwicklungs-Workloads."} \cite{AmazonAWSSpot:1}.
@@ -71,7 +71,7 @@ Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-
 
 Das Verkaufsargument \emph{90 \%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Hacken, dass einem die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
 
-Möchte man die EC2 Spot Instanzen für Geodatenprozessierung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
+Möchte man die EC2 Spot Instanzen für die Geodatenverarbeitung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
 
 Wie auf der Abbildung \ref{fig:spot} dargestellt, kann das Verhalten der Instanz bei einem Interrupt\footnote{Wenn Amazon die Spot Instanz für einen anderen Zweck beanspruchen möchte, die wegnimmt.} definiert werden. Es besteht dabei sogar die Möglichkeit eines \emph{Hibernate}, dass der Zustand des RAMs auf der Festplatte persistiert wird.
 
@@ -99,18 +99,18 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 \item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren}) kopiert\footnote{Via \emph{rsync}}
 \item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI} bereitzustellen.
 \item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volume} des Servers.
-\item Die Daten auf dem Server via Docker prozessieren\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}.
+\item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}.
 \item Kopieren der Web-optimierten Daten auf S3.
 \item Die Daten visualisieren, um inhaltlich testen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io})}, dass auf die 3D Tiles zugreift.
 \end{enumerate}
 
-\subsubsection{Aufwand der Prozessierung}
+\subsubsection{Aufwand der Verarbeitung}
 \label{aufwand_prozessierung}
 Folgende Schritte sind besonders aufwendig:
 \begin{itemize}
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Zippen (Packen und Entpacken) der Rohdaten nimmt lange.
 \item Es kommt immer mal wieder vor, dass Daten korrupt sind, was zu einer Nachlieferung führt, mit der Gefahr, dass es mit Versionen der Lieferung zu einem Durcheinander kommen könnte.
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Prozessierung eine EC2 Instanz mit EFS bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Prozessierung} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Nebst der Bemühung der IT, muss auf der Instanz selber anschliessend das eine und andere manuell installiert und konfiguriert werden.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Verarbeitung eine EC2 Instanz mit EFS bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Nebst der Bemühung der IT, muss auf der Instanz selber anschliessend das eine und andere manuell installiert und konfiguriert werden.
 \end{itemize}
 
 \subsubsection{Technische Komponenten}
