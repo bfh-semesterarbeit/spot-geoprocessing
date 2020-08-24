@@ -1,6 +1,6 @@
 \section{Evaluation}
 \subsection{Erfahrungen}
-Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH Bern: Bsp. die Vorlesungen Architektur, IaaS, PaaS, Docker und Kubernetes} und das günstige Angebot von AWS haben den Autor motiviert, die komplette Infrastruktur für den Prototypen selber in einem eigenen AWS Testaccount aufzubauen. Da die Infrastruktur und die Verarbeitung deklarativ festgehalten wurden, kann ein Grossteil dieses Codes auch im Account des Betriebes ohne grosse Anpassungen wiederverwendet werden.
+Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH Bern: Bsp. die Vorlesungen Architektur, IaaS, PaaS, Docker und Kubernetes.} und das günstige Angebot von AWS haben den Autor motiviert, die komplette Infrastruktur für den Prototypen selber in einem eigenen AWS Testaccount aufzubauen. Da die Infrastruktur und die Verarbeitung deklarativ festgehalten wurden, kann ein Grossteil dieses Codes auch im Account des Betriebes ohne grosse Anpassungen wiederverwendet werden.
 
 Im Betrieb hätte das Team und die IT Abteilung das nötige Know-How gehabt, um mit dieser Arbeit weiter zu kommen, als es jetzt der Fall ist. Aber der Autor hat sich bewusst dazu entschieden, die Arbeit möglichst selbständig zu realisieren und  diese Ressource zu schonen, indem er sie so wenig wie möglich genutzt hat. Es war für den Autor schon nur eine Hilfe, zu Wissen, dass die Möglichkeit einer Unterstützung da war. Dies führte dazu, dass der Autor Momente der Ratlosigkeit erleben musste\ref{har:perplexity}. Was nicht weiter schlimm war, da \textit{"Perplexity is the beginning of knowledge"} \autocite[33]{CloudNativ:1}.
 
@@ -9,7 +9,7 @@ Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads}
 
 \subsection{Wirtschaftlichkeit}
 \paragraph{Personalstunden}
-Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team} weg. Vor allem diese Kosten rechnen sich. Die Verarbeitungsschritte sind im Code abgebildet, was Fehleranfälligkeit kleiner macht, als wenn Bash-Befehle aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle\footnote{In der AWS eine sogenannter IAM-Benutzer} eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
+Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team.} weg. Vor allem diese Kosten rechnen sich. Die Verarbeitungsschritte sind im Code abgebildet, was Fehleranfälligkeit kleiner macht, als wenn Bash-Befehle aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle\footnote{In der AWS eine sogenannter IAM-Benutzer.} eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
 \paragraph{Einsparungen Spot im Vergleich zu On-Demand}
 Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des POCs aufgelistet. Verarbeitung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
 

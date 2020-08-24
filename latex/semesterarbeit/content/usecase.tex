@@ -40,7 +40,7 @@ Zu den Lanschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D.
 
 Seit der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und punkto Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
 
-Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall für positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}}. Früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
+Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall für positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}.}. Früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
 
 \section{Der Use Case}
 \subsection{Problemstellung}
@@ -84,7 +84,7 @@ Diese Vorankündigung lässt sich auch via AWS CLI abfragen. In einem grösseren
 \subsubsection{Prozess der Publikation}
 Das Aufzeigen des Ist-Zustandes der 3D Datenpublikation soll helfen sich einen Überblick, eine Ausgangslage, zu verschaffen. Es bildet die Grundlage, um die Frage zu beantworten, welche Arbeiten erledigt werden müssen, um die 3D Daten im Web zu publizieren? Welche Arbeitsschritte könnten automatisiert werden? 
 
-Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{Vom Bereich Topografie}, müssen zurzeit folgende Schritte, die in der Abbildung \ref{fig:ist_zustand} referenziert sind, erledigt werden:
+Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{Vom Bereich Topografie.}, müssen zurzeit folgende Schritte, die in der Abbildung \ref{fig:ist_zustand} referenziert sind, erledigt werden:
 
 \begin{figure}[H]
 	\centering
@@ -94,14 +94,14 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 \end{figure}
 
 \begin{enumerate}
-\item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
+\item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA (beides XML).} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
 \item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
-\item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren}) kopiert\footnote{Via \emph{rsync}}
-\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI} bereitzustellen.
-\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volume} des Servers.
-\item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln ist das Web-Format \emph{Cesium3DTiles}}.
+\item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren.}) kopiert\footnote{Via \emph{rsync}.}
+\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI.} bereitzustellen.
+\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
+\item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln in das Web-Format \emph{Cesium3DTiles}.}.
 \item Kopieren der Web-optimierten Daten auf S3.
-\item Die Daten visualisieren, um inhaltlich testen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io})}, dass auf die 3D Tiles zugreift.
+\item Die Daten visualisieren, um inhaltlich testen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io}).}, dass auf die 3D Tiles zugreift.
 \end{enumerate}
 
 \subsubsection{Aufwand der Verarbeitung}
