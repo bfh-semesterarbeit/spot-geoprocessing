@@ -13,7 +13,7 @@ Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwa
 Wobei der Lösungsansatz simpler und somit weniger fehleranfällig zu sein scheint. Dieser Ansatz kann, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
 
 \paragraph{Sicherung der Qualität:} Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
-häufig erst nach der Publikation entdeckt. Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Da keine inhaltliche Prüfung der Daten gemacht werden kann, könnte man sich überlegen, wie die Daten sonst noch geprüft werden könnten.
+häufig erst nach der Publikation entdeckt. Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Da keine inhaltliche Prüfung der Rohdaten gemacht werden kann, wäre es sicher hilfreich, wenn der Datenlieferant die Iterationen der Publizierung gleich selber machen könnte und dann nur noch Bescheid gibt, wenn sie seines Erachtens in Ordnung sind.
 
 \subsubsection{Bereitstellung der Infrastruktur für die Verarbeitung}
 Die Rohdaten werden via Docker Image verarbeitet. Jedes Mal wenn das Image für die Verarbeitung ausgeführt werden soll, muss die IT gebeten werden die nötige Infrastruktur bereitzustellen. Idealerweise findet sich eine Lösung, die diesen Schritt überflüssig macht.
@@ -36,9 +36,9 @@ Der Autor ist auf drei Möglichkeiten gestossen, um Geodaten mit AWS Spot Instan
 \paragraph{Direkt auf einer Spot Instanz:}
 Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Verarbeitung, weil die Daten im Prinzip wie bisher auf EC2 Instanz verarbeitet werden; mit dem Nachteil, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
 
-Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil die Verarbeitung bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas das funktioniert zu ändern. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Verarbeitung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut stemmen.
+Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil die Verarbeitung bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas Funktionierendes zu ändern\footnote{Security Maintenance bis 2028 \cite{Ubuntu2020}.}. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Verarbeitung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut stemmen.
 
-Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz gewählt: Dieser Ansatz richtet das Ubuntu Image in der Startup Phase des Servers ein. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
+Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz\footnote{Eigentlich ein Bash Skript. Unter AWS als \emph{User Data} bezeichnet.} gewählt: Dieser Ansatz provisioniert den Server der Startup Phase. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
 Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche Initialisierung wurde an \emph{Ansible} übergeben. 
 
 \paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}

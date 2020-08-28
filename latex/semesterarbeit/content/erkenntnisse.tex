@@ -4,14 +4,14 @@ Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH Bern: 
 
 Im Betrieb hätte das Team und die IT Abteilung das nötige Know-How gehabt, um mit dieser Arbeit weiter zu kommen, als es jetzt der Fall ist. Aber der Autor hat sich bewusst dazu entschieden, die Arbeit möglichst selbständig zu realisieren und  diese Ressource zu schonen, indem er sie so wenig wie möglich genutzt hat. Es war für den Autor schon nur eine Hilfe, zu Wissen, dass die Möglichkeit einer Unterstützung da war. Dies führte dazu, dass der Autor Momente der Ratlosigkeit erleben musste\ref{har:perplexity}. Was nicht weiter schlimm war, da \textit{"Perplexity is the beginning of knowledge"} \autocite[33]{CloudNativ:1}.
 
-Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Aufgrund der gemounteten SSD Festplatte musste der Pool der freien Instanzen auf die Availability-Zone, in welcher sich die Festplatte befindet, eingeschränkt werden. Der Autor war darüber erstaunt, dass ihm während der ganzen Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde; dies trotz Beschränkung auf eine Availability-Zone.
+Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Der Autor war darüber erstaunt, dass ihm während der ganzen Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde. Während der Entwicklung wurde die Spot Flotte aufgrund eines EBS-Volumens auf eine bestimmte Availability-Zone beschränkt. Und nicht einmal mit dieser Einschränkung ist es zu einem Interrupt gekommen. Um das Verhalten bei Interrupts testen zu können, mussten die Spot-Instanzen somit mutmasslich terminiert werden.
 
 
 \subsection{Wirtschaftlichkeit}
 \paragraph{Personalstunden}
 Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team.} weg. Vor allem diese Kosten rechnen sich. Die Verarbeitungsschritte sind im Code abgebildet, was Fehleranfälligkeit kleiner macht, als wenn Bash-Befehle aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle\footnote{In der AWS eine sogenannter IAM-Benutzer.} eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
 \paragraph{Einsparungen Spot im Vergleich zu On-Demand}
-Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des POCs aufgelistet. Verarbeitung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
+Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die Ergebnisse des Prototyps aufgelistet. Verarbeitung der Gebäude mit der Mindesanforderung: 16 CPUs und 60 GByte Memory. Die Gesamtrechenzeit war ca. 18 Stunden und es konnten 76\% der Kosten eingespart werden.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -31,12 +31,26 @@ Um die Kosten von On-Demand mit Spot Instanzen zu vergleichen, werden hier die E
 Schaut man die Kosten relativ an, ist das Sparpotential enorm: 76\%! In absoluten Zahlen erscheint das Sparpotential für einen einzelnen Verarbeitungsauftrag nicht riesig: ca. 15 \$. Dazu muss allerdings ergänzt werden, dass die Verarbeitungszeit durch die Automatisierung verkürzt wurde. Ausserdem werden jährlich mehrere 3D Updates in Auftrag gegeben. Der aufwändigste Auftrag davon ist das Update des 3D Terrains, das eine wesentlich grössere Instanz über eine längere Zeitspanne\footnote{Ca. 1 Woche.} braucht. 
 
 \subsection{Kritische Punkte}
-TODO: 
-Bezüglich Authentifizierung hat der POC Technische Schulden.
 
-Schön wäre, wenn der Prozess selber in viele kleine Teile aufgeteilt werden könnte. Doch zurzeit ist das Tool eine einzige Backbox in einem Container und es funktionieren nur vollständige Publikationen und keine Inkrementellen. 
+\subsubsection{Security}
+Bezüglich IAM hat der Prototyp noch technische Schulden. Dem Autor ist bewusst, dass folgende zwei Sicherheitslücken bezüglich Zugängen vorhanden sind:
+\paragraph{github.com:} Der Einfachheit halber wurde das Github Repository, auf welchem sich das Init-Skript und das Ansible Playbook befinden, öffentlich zugänglich gemacht (Abb. \ref{fig:ist_zustand}, Nr. 2). Dies ist nicht weiter problematisch, da der Code auf Github keine Passwörter etc. bekannt gibt. Aber es sind darin Informationen über die AWS Infrastruktur enthalten. Sauber wäre eine Implementation, die Github Credentials eines privaten Repositories verwaltet. Geeignet dazu wäre z.B. der AWS Secrets Manager \cite{Secrets2020}.
+\paragraph{AWS Key für S3:} Eigens für das Kopieren auf S3 wurde eine IAM Rolle angelegt, die nicht mehr darf, als auf S3 zu kopieren (Abb. \ref{fig:ist_zustand}, Nr. 6). Die Keys dazu wurden auf dem EFS-Volumen abgelegt. Dies ist sicher nicht ideal. Zwar ist die Sicherheitsgruppe des EFS ist zwar so konfiguriert, dass nur die Sicherheitsgruppe der EC2 Instanzen darauf Zugriff haben sollten, aber dennoch sollten keine unverschlüsselten Keys auf dem Filesystem herumliegen.
+Um diese Sicherheitslücke zu schliessen, könnte eigens dafür eine IAM Rolle für die EC2 Instanz angelegt werden \cite{IAMEC2}.
 
+Sollte der Prototyp in den Betrieb überführt werden, würde sowieso das IAM der swisstopo übernommen werden müssen; und dieses Kapitel hätte sich erübrigt.
+
+\subsubsection{Datenverarbeitung als Blackbox}
+Idealerweise wird die Datenverarbeitung in kleine parallelisierbare und in sich selber geschlossene Schritte unterteilt. Nach einem Interrupt der Instanz können dann die noch nicht abgeschlossenen Schritte fortgeführt werden. 
+
+Beim gewählten Use Case der 3D Datenverarbeitung handelt es sich um eine Blackbox in einem Container, die entweder Alles oder Nichts verarbeitet. Was in diesem Fall alle (erfassten) Gebäude der Schweiz bedeutet. Damit der Prototyp funktioniert, müssen die Spot Instanzen mindestens 10 Stunden ohne Interrupt laufen. Zum Glück verhalten sich die Spot Instanzen in der Regel stabil genug, um die einzelnen langwierigen Schritte seriell verarbeiten zu können.
 
 \section{Ausblick}
+Bald steht das nächste 3D Update vor der Tür. Bei der Gelegenheit könnte der Automatisierungsteil übernommen werden. Da es sich dabei um ein Ansible Playbook handelt, ein Skript in einer deklarative Sprache, dokumentiert es auch gleich die einzelnen Verarbeitungsschritte. Anpassungen sind einfach zu machen. Falls es bei der ersten Nachführung noch eine herkömmliche On-Demand EC2 Instanz sein wird, kann das Skript dennoch verwendet werden.
 
-\section{Schlusswort}
+Mittelfristig wäre es schon nur aus Gründen des Kostensparens interessant, wenn rechenintensive Geodatenverarbeitungen auf Spot Instanzen laufen könnten. Hier nochmals: Relative Einsparungen von mehr als 70\%, was sich mit der Zeit auch in absoluten Kosteneinsparungen sehen lassen würde.\\ Um den Koordinationsaufwand mit der IT zu verringern, könnte die Person, die eine Spot Instanz braucht, mit den nötigen Rechten versehen werden: Bsp. könnte sie, wie bei einem Load-Balancer, die Anzahl Instanzen der Spot Flotte von 0 auf 1 ändern dürfen, um nach getaner Arbeit die Anzahl Instanzen wieder auf 0 zu setzen.
+
+Sobald die swisstopo über eine Hybrid Cloud verfügt, könnte die Topografie neue Daten direkt auf das EFS schreiben. Dieser Event könnte getriggert werden, um eine Spot Instanz für die 3D Geodatenverarbeitung zu starten. Jeweils ca. 18 Stunden später wären die Daten im Web und die Topographie könnte diese auf der Testumgebung einsehen (Abb. \ref{fig:ist_zustand}, Nr. 7). Diesen Vorgang könnte die Topografie solange wiederholen, bis sie mit dem Resultat zufrieden ist.\\Ohne Hybrid Cloud müssten die Daten immer noch vom Intranet in die AWS VPC kopiert werden. Auch dieser Vorgang liesse sich einfach automatisieren.
+
+Persönlich hat dem Autor die Tour mit Spot Instanzen Spass gemacht. Die bei der Tour gemachten Erfahrungen waren ein guter Einstieg, um Services der AWS Cloud besser verstehen und nutzen zu können. Es wird sicher nicht bei dieser Tour bleiben.
+

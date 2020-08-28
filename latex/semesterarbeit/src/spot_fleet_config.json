@@ -2,310 +2,140 @@
     "IamFleetRole": "arn:aws:iam::483277333869:role/aws-ec2-spot-fleet-tagging-role",
     "AllocationStrategy": "capacityOptimized",
     "TargetCapacity": 1,
-    "ValidFrom": "2020-08-14T06:36:38Z",
-    "ValidUntil": "2021-08-14T06:36:38Z",
-    "SpotPrice": "1.482",
+    "ValidFrom": "2020-08-28T08:39:56Z",
+    "ValidUntil": "2021-08-28T08:39:56Z",
     "TerminateInstancesWithExpiration": true,
-    "LaunchSpecifications": [
+    "LaunchSpecifications": [],
+    "Type": "request",
+    "LaunchTemplateConfigs": [
         {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "r3.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+            "LaunchTemplateSpecification": {
+                "LaunchTemplateId": "lt-0badf33514830ba8c",
+                "Version": "1"
+            },
+            "Overrides": [
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "1.482",
-            "SecurityGroups": [
+                    "InstanceType": "r3.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "r3.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "r4.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "r3.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "1.1856",
-            "SecurityGroups": [
+                    "InstanceType": "r4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "r4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "m5.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "r4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "0.856",
-            "SecurityGroups": [
+                    "InstanceType": "m5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "m5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "r5.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "m5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "1.128",
-            "SecurityGroups": [
+                    "InstanceType": "r5n.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "r5n.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "r5n.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "r5n.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "1.336",
-            "SecurityGroups": [
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "m4.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "0.888",
-            "SecurityGroups": [
+                    "InstanceType": "m5ad.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "m5ad.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "r5ad.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "m5ad.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "1.168",
-            "SecurityGroups": [
+                    "InstanceType": "r5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "r5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "ImageId": "ami-07ee42ba0209b6d77",
-            "InstanceType": "m5ad.4xlarge",
-            "SubnetId": "subnet-7dcacf35, subnet-f66512ac, subnet-1bc2e87d",
-            "KeyName": "bfh_root",
-            "BlockDeviceMappings": [
+                    "InstanceType": "r5.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
+                },
                 {
-                    "DeviceName": "/dev/sda1",
-                    "Ebs": {
-                        "DeleteOnTermination": true,
-                        "SnapshotId": "snap-0fc98bbeb73c2fb3b",
-                        "VolumeSize": 8,
-                        "Encrypted": false,
-                        "VolumeType": "gp2"
-                    }
-                }
-            ],
-            "SpotPrice": "0.92",
-            "SecurityGroups": [
+                    "InstanceType": "m5d.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-7dcacf35"
+                },
                 {
-                    "GroupId": "sg-098669727548dcedd"
-                }
-            ],
-            "UserData": "IyEvYmluL2Jhc2gKIyB2YXJzCk1ZX1VTRVI9dWJ1bnR1CkhPTUVfRElSPSIvaG9tZS8ke01ZX1VTRVJ9IgphcHQtZ2V0IHVwZGF0ZQoKIyBnZXQgZ2l0CmFwdCBpbnN0YWxsIC15IGdpdC1hbGwKCiMgaW5zdGFsbCBhbnNpYmxlCmFwdCBpbnN0YWxsIC15IHNvZnR3YXJlLXByb3BlcnRpZXMtY29tbW9uCmFwdC1hZGQtcmVwb3NpdG9yeSAtLXllcyAtLXVwZGF0ZSBwcGE6YW5zaWJsZS9hbnNpYmxlCmFwdC1nZXQgdXBkYXRlCmFwdCBpbnN0YWxsIC15IGFuc2libGUKYXB0IGluc3RhbGwgLXkgcHl0aG9uLWFwdAoKIyBnZXQgcHJvamVjdApnaXQgY2xvbmUgaHR0cHM6Ly9naXRodWIuY29tL2JmaC1zZW1lc3RlcmFyYmVpdC91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy5naXQgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nIgpjaG93biAtUiB1YnVudHUudWJ1bnR1ICIke0hPTUVfRElSfS91cC1hbmQtcnVubmluZy1kYXRhcHJvY2Vzc2luZy8iCgojIG1vdW50IGVmcwphcHQgaW5zdGFsbCAteSBuZnMtY29tbW9uCgpta2RpciAiJHtIT01FX0RJUn0vZGF0YSIKY2htb2QgZ28rcncgIiR7SE9NRV9ESVJ9L2RhdGEiCgptb3VudCAtdCBuZnMgXAotbyBuZnN2ZXJzPTQuMSxyc2l6ZT0xMDQ4NTc2LHdzaXplPTEwNDg1NzYsaGFyZCx0aW1lbz02MDAscmV0cmFucz0yLG5vcmVzdnBvcnQgZnMtNWFjZTFkOTAuZWZzLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tOi8gXAoiJHtIT01FX0RJUn0vZGF0YSIKCiMgcnVuIGFuc2libGUKc2xlZXAgMTBzICMgd2FpdGluZyBmb3IgZWZzCnVzZXJtb2QgLWFHIGRvY2tlciB1YnVudHUKY2QgIiR7SE9NRV9ESVJ9L3VwLWFuZC1ydW5uaW5nLWRhdGFwcm9jZXNzaW5nL2Fuc2libGUiCmFuc2libGUtcGxheWJvb2sgLi9wbGF5Ym9va3MvYmFzZS55bWwK",
-            "TagSpecifications": [
+                    "InstanceType": "m5d.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-f66512ac"
+                },
                 {
-                    "ResourceType": "instance",
-                    "Tags": [
-                        {
-                            "Key": "job",
-                            "Value": "3d-buildings"
-                        }
-                    ]
+                    "InstanceType": "m5d.4xlarge",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "subnet-1bc2e87d"
                 }
             ]
         }
     ],
-    "Type": "maintain",
-    "TagSpecifications": [
-        {
-            "ResourceType": "spot-fleet-request",
-            "Tags": [
-                {
-                    "Key": "job",
-                    "Value": "3d-buildings"
-                }
-            ]
-        }
-    ]
+    "OnDemandTargetCapacity": 1
 }

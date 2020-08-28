@@ -2156,13 +2156,17 @@
     <bcf:citekey order="8">Kehlmann2005</bcf:citekey>
     <bcf:citekey order="9">kanban2010</bcf:citekey>
     <bcf:citekey order="10">Christ2020</bcf:citekey>
-    <bcf:citekey order="11">toposhop2010</bcf:citekey>
-    <bcf:citekey order="12">watson2018</bcf:citekey>
-    <bcf:citekey order="13">technischeschulden2010</bcf:citekey>
-    <bcf:citekey order="14">AmazonAWSSpot:1</bcf:citekey>
-    <bcf:citekey order="15">AGI2010</bcf:citekey>
-    <bcf:citekey order="16">FreeTier2020</bcf:citekey>
-    <bcf:citekey order="17">CloudNativ:1</bcf:citekey>
+    <bcf:citekey order="11">FS2010</bcf:citekey>
+    <bcf:citekey order="12">toposhop2010</bcf:citekey>
+    <bcf:citekey order="13">watson2018</bcf:citekey>
+    <bcf:citekey order="14">technischeschulden2010</bcf:citekey>
+    <bcf:citekey order="15">AmazonAWSSpot:1</bcf:citekey>
+    <bcf:citekey order="16">AGI2010</bcf:citekey>
+    <bcf:citekey order="17">Ubuntu2020</bcf:citekey>
+    <bcf:citekey order="18">FreeTier2020</bcf:citekey>
+    <bcf:citekey order="19">CloudNativ:1</bcf:citekey>
+    <bcf:citekey order="20">Secrets2020</bcf:citekey>
+    <bcf:citekey order="21">IAMEC2</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

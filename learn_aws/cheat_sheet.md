@@ -6,6 +6,7 @@ This document is a cheat sheet to master AWS
 
 Login: <https://aws.amazon.com/de/console/>
 
+
 ## AWS SPOT
 <https://aws.amazon.com/de/ec2/spot/>
 
