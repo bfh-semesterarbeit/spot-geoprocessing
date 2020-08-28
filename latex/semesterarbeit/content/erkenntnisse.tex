@@ -38,14 +38,14 @@ Bezüglich IAM hat der Prototyp noch technische Schulden. Dem Autor ist bewusst,
 \paragraph{AWS Key für S3:} Eigens für das Kopieren auf S3 wurde eine IAM Rolle angelegt, die nicht mehr darf, als auf S3 zu kopieren (Abb. \ref{fig:ist_zustand}, Nr. 6). Die Keys dazu wurden auf dem EFS-Volumen abgelegt. Dies ist sicher nicht ideal. Zwar ist die Sicherheitsgruppe des EFS ist zwar so konfiguriert, dass nur die Sicherheitsgruppe der EC2 Instanzen darauf Zugriff haben sollten, aber dennoch sollten keine unverschlüsselten Keys auf dem Filesystem herumliegen.
 Um diese Sicherheitslücke zu schliessen, könnte eigens dafür eine IAM Rolle für die EC2 Instanz angelegt werden \cite{IAMEC2}.
 
-Sollte der Prototyp in den Betrieb überführt werden, würde sowieso das IAM der swisstopo übernommen werden müssen; und dieses Kapitel hätte sich erübrigt.
+Sollte der Prototyp in den Betrieb überführt werden, müsste das IAM der swisstopo übernommen; und dieses Kapitel hätte sich erübrigt.
 
 \subsubsection{Datenverarbeitung als Blackbox}
 Idealerweise wird die Datenverarbeitung in kleine parallelisierbare und in sich selber geschlossene Schritte unterteilt. Nach einem Interrupt der Instanz können dann die noch nicht abgeschlossenen Schritte fortgeführt werden. 
 
 Beim gewählten Use Case der 3D Datenverarbeitung handelt es sich um eine Blackbox in einem Container, die entweder Alles oder Nichts verarbeitet. Was in diesem Fall alle (erfassten) Gebäude der Schweiz bedeutet. Damit der Prototyp funktioniert, müssen die Spot Instanzen mindestens 10 Stunden ohne Interrupt laufen. Zum Glück verhalten sich die Spot Instanzen in der Regel stabil genug, um die einzelnen langwierigen Schritte seriell verarbeiten zu können.
 
-Der Test, der die Rohdaten auf well-formed XML testet, hilft Fehler, vor dem langwierigen Verarbeiten in der Blackbox, abzufangen. Jedoch leider nicht alle Fehler. Wenn man nun davon ausgeht, dass es in den ca. 8 Millionen Gebäuden, die geliefert wurden, immer mal wieder fehlerhafte Daten hat, welche die Blackbox ins Straucheln bringen, dann kann die 3D Datenverarbeitung trotz aller Automaistation zu einem mühseligen Unterfangen werden.
+Der Test, der die Rohdaten auf well-formed XML testet, hilft Fehler, vor dem langwierigen Verarbeiten in der Blackbox, abzufangen. Jedoch leider nicht alle Fehler. Wenn man nun davon ausgeht, dass es in den ca. 8 Millionen Gebäuden, die geliefert wurden, immer mal wieder fehlerhafte Daten hat, welche die Blackbox ins Straucheln bringen, kann die 3D Datenverarbeitung trotz aller Automaistation zu einem mühseligen Unterfangen werden.
 
 \section{Ausblick}
 Bald steht das nächste 3D Update vor der Tür. Bei dieser Gelegenheit könnte der Automatisierungsteil dieser Semesterarbeit übernommen werden. Da es sich dabei um ein Ansible Playbook in einer deklarativen Sprache handelt, sind die einzelnen Verarbeitungsschritte auch gleich dokumentiert. Anpassungen sind einfach zu machen. Falls diese Nachführung auf einer herkömmlichen On-Demand EC2 Instanz gemacht werden müsste, könnte das Skript dennoch verwendet werden.
