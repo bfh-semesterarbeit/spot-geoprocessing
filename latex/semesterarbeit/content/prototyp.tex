@@ -1,41 +1,44 @@
-\section{Prototyp}
-\subsection{Realisierung}
-Für die Realisierung des Prototypen hat der Autor das Kennenlernangebot von AWS, ein einjähriges kostenloses Kontingent an Services und Produkten \cite{FreeTier2020}, gewählt. 
+\section{Realisierung des Prototyps}
+Als Umgebung, um die Infrastruktur für den Prototypen bereitzustellen, hat der Autor das Kennenlernangebot von AWS, ein einjähriges kostenloses Kontingent an Services und Produkten \cite{FreeTier2020}, gewählt.
 
-Nachdem der \emph{AWS Testaccount} erstellt war, mussten erste Schritte wie grundlegende Konfigurationen des Identity Access Management (IAM) gemacht und das Steuern von Spot Anfragen erlernt werden.
+Nachdem der erwähnte \emph{AWS Account} erstellt war, mussten erste Schritte, wie grundlegende Konfigurationen des Identity Access Management (IAM) gemacht und das Steuern von Spot Anfragen, das Einrichten eines Container Repositories (ECR), das Aufsetzen eines öffentlich zugänglichen S3 Buckets und anderes aus dem AWS Produktekatalog, erlernt werden.
 
-Weitere Schritte folgten. Die Realisierung des Prototypen wird in den folgenden Kapiteln beschrieben werden.
+Weitere Schritte folgten. Die eigentliche Realisierung des Prototypen wird in den folgenden Kapiteln beschrieben werden. Das Endresultat wird jedoch der Nachvollziehbarkeit halber schon einmal hier abgebildet:
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.90\textwidth]{poc_zustand}
-	\caption{Geodatenprozessierung mit SPOT Instanzen.}
+	\caption{Geodatenverarbeitung mit SPOT Instanzen.}
 	\label{fig:ist_zustand}
 \end{figure}
 
-\subsubsection{Der Publikationsvorgang als Code}
-Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht via einem neuen AMI.}, lag es auf der Hand auch gleich Ansible für den Publikationsvorgang zu verwenden (Nr. 3).
-
-Das Init-Skript wie auch die Ansible Deklarationen können \href{https://github.com/bfh-semesterarbeit/up-and-running-dataprocessing}{auf github.com/bfh-semesterarbeit} angeschaut werden.
-
+\subsection{Die Datenverarbeitung als Code}
+Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht mit einem neuen AMI.}, lag es auf der Hand, auch gleich dieselbe Technologie für die Realisierung der Publizierung zu verwenden (Nr. 3). 
+Viele Annehmlichkeiten, wie die Nähe zur Shell und Python, das Logging und deklarativer Code zeigten sich in der Realisierung als hilfreich. Das Init-Skript wie auch das Ansible Playbook können auf \href{https://github.com/bfh-semesterarbeit/up-and-running-dataprocessing}{github.com/bfh-semesterarbeit} eingesehen werden.
 
 
+\subsection{Spot Flottenanfrage}
+Als Setup für die Spot Flottenanfrage wurde ein sogenanntes Launch Template mit den wichtigsten Konfigurationen wie Sicherheitsgruppe, Wahl des AMI, die 200 GB grosse SSD Festplatte und User Data angelegt. Anschliessend wurde eine Spot Flottenanfrage basierend auf diesem Template erstellt. Wobei als Mindestanforderung an den Rechner 16 CPUs und 60 GB Memory waren. Als Zielkapazität wurde eine Instanz gewählt, mit der Option, dass die Zielkapazität aufrechterhalten bleiben soll: Somit wird nach jedem Interrupt automatisch eine neue Instanz mit der definierten Konfiguration zur Verfügung gestellt.
 
-\subsubsection{Handling der Interrupts}
-Sämtliche Schritte werden via Ansible verwaltet und sobald ein Schritt erledigt wurde, hält Ansible dies auf dem gemounteten EFS Volumen in einer Textdatei fest.
+\subsection{Handling der Interrupts}
+Wie im Kapitel \ref{kap:bugdet_instanzen} beschrieben, sind Spot Instanzen so günstig, weil sie jederzeit einem besser zahlenden Kunden zur Verfügung gestellt werden können. Also muss der Publikationsvorgang mit dem Handling von Interrupts umgehen können. 
+Der Einfachheit halber hat der Autor gänzlich auf das \textit{Horchen eines bevorstehenden Interrupts} via RESTful Abfrage (In Anhang \ref{appendix:restful} beschrieben) oder \emph{CloudWatch} verzichtet und hat stattdessen die Publizierung als Serie betrachtet und in Schritte unterteilt. Sobald ein Schritt erledigt wird, wird dies auf dem EFS Volumen in einer Textdatei festgehalten. Falls es zu einem Interrupt kommen sollte, wird von der Spot Flotte die nächste Instanz bereitgestellt und die Publizierung macht bei dem Schritt weiter, der zuletzt in der Textdatei festgehalten wurde (Abbildung \ref{fig:ist_zustand}, Nr. 5).
 
-Falls es zu einem Interrupt kommen sollte, wird von der Spot Flotte die nächste Instanz bereitgestellt und Ansible macht bei dem Schritt weiter, der zuletzt in der Textdatei festgehalten wurde (Abbildung \ref{fig:ist_zustand}, Nr. 5).
+\subsection{Testen der Datenstruktur}
 
+\subsection{Logging}
+
+
+\subsection{Inhaltliche Kontrolle der publizierten Daten}
+Das Resultat kann vorläufig\footnote{Bis am 1. November 2020} hier betrachtet werden:
+\href{https://codepen.io/rebert/pen/ExKZmmE}{https://codepen.io/rebert/pen/ExKZmmE} Wobei nur die Gebäude vom S3 Testbucket kommen (Abb. \ref{fig:ist_zustand}, Nr. 7) 
 
 \subsection{Testen}
 
-\paragraph{Testen der Datenstruktur}
+\subsubsection{Unerwartete Interrupts}
+Mit einem Test
 
 
-\paragraph{Unerwartetes Herunterfahren}
+\subsubsection{Full-load test}
+Der komplette Rohdatensatz, alle (erfassten) Gebäude der Schweiz, wurde verarbeitet. 
 
-
-\paragraph{Real Case Szenario}
-
-Der komplette Rohdatensatz, alle Gebäude der Schweiz, wurde prozessiert. Das Resultat kann vorläufig\footnote{Bis am 1. November 2020} hier betrachtet werden:
-\href{https://codepen.io/rebert/pen/ExKZmmE}{https://codepen.io/rebert/pen/ExKZmmE} Wobei nur die Gebäude vom S3 Testbucket kommen (Abb. \ref{fig:ist_zustand}, Nr. 7) 
