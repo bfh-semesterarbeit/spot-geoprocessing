@@ -17,10 +17,8 @@ Nebst der Publikation der Daten ist unser Team für den Betrieb und der Weiteren
 und des Viewers verantwortlich. Der ganze Technologie Stack wurde schon länger nicht mehr grundlegend erneuert. Zurzeit wird
 die gesamte Architektur analysiert und überarbeitet, um eine gestaffelte Migration auf eine neue
 Lösung zu ermöglichen.
-Einige Rahmenbedingungen dieser zukünftigen Architektur sind bereits klar: Freie Software auf Linux\footnote{Wann immer möglich, freie Software \cite{FS2010}: OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}. Das Geoportal des
-Bundes wird weiterhin in der AWS Cloud betrieben werden, die Migration wird vor allem über
-Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon
-Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
+Einige Rahmenbedingungen dieser zukünftigen Architektur sind bereits klar: Das Geoportal des
+Bundes wird weiterhin in der AWS Cloud betrieben werden, freie Software auf Linux\footnote{Wann immer möglich, freie Software \cite{FS2010}: OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}, die Migration wird vor allem über Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
 Integration wird AWS Codebuild/Pipeline zum Einsatz kommen.
 
 \newpage
@@ -44,8 +42,7 @@ Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall f
 
 \section{Der Use Case}
 \subsection{Problemstellung}
-Es ist der swisstopo schon lange ein Anliegen, dass die Publikationvorgänge von Geodaten optimiert werden
-sollen. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
+Es ist der swisstopo schon lange ein Anliegen, die Publikationvorgänge von Geodaten zu optimieren. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
 
 Besonders aufwändig erweist sich zurzeit die Publikation von 3D Daten. Die manuelle Publikation
 der 3D Daten benötigt eigene Tools, die auf einem performanten und somit teuren Rechner laufen
@@ -69,7 +66,7 @@ Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-
 	\label{fig:spot}
 \end{figure}
 
-Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Hacken, dass einem die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
+Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass einem die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
 
 Möchte man die EC2 Spot Instanzen für die Geodatenverarbeitung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
 
@@ -88,7 +85,7 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.90\textwidth]{ist_zustand}
+	\includegraphics[width=1.0\textwidth]{ist_zustand}
 	\caption{Arbeitsschritte, die es braucht, um die 3D Daten zu Publizieren.}
 	\label{fig:ist_zustand}
 \end{figure}
@@ -96,7 +93,7 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 \begin{enumerate}
 \item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA (beides XML).} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
 \item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
-\item Kopieren der gezippten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren.}) kopiert\footnote{Via \emph{rsync}.}.
+\item Kopieren der komprimierten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren.}) kopiert\footnote{Via \emph{rsync}.}.
 \item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI.} bereitzustellen.
 \item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
 \item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln in das Web-Format \emph{Cesium3DTiles}.}.
@@ -108,7 +105,7 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 \label{aufwand_prozessierung}
 Folgende Schritte sind besonders aufwendig:
 \begin{itemize}
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Zippen (Packen und Entpacken) der Rohdaten dauert lange.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Komprimieren (Packen und Entpacken) der Rohdaten dauert lange.
 \item Es kommt immer mal wieder vor, dass Daten korrupt sind, was zu einer Nachlieferung führt, mit der Gefahr, dass es mit Versionen der Lieferung zu einem Durcheinander kommen könnte.
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Verarbeitung eine EC2 Instanz mit EFS bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Nebst der Bemühung der IT, muss auf der Instanz selber anschliessend das eine und andere manuell installiert und konfiguriert werden.
 \end{itemize}

@@ -7,10 +7,10 @@ Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwa
 \paragraph{Das Bereitstellen der Rohdaten} nimmt aufgrund der Datenmenge\footnote{Weil es sich um mehrere Millionen Dateien handelt.} viel Zeit in Anspruch. Hier gäbe es folgende zwei Lösungsansätze:
 \begin{enumerate}
 \item Der Datenlieferant könnte direkt aufs EFS schreiben (Abb. \ref{fig:ist_zustand}, Nr. 5)
-\item Automatischer Prozess via Cronjob oder oder Trigger, der die Kopier-Schritte (Abb. \ref{fig:ist_zustand}, Schritte Abb. \ref{fig:ist_zustand}) regelmässig bereitstellt.
+\item Automatischer Prozess via Cronjob oder Trigger, der die Kopierschritte (Abb. \ref{fig:ist_zustand}, Schritte Abb. \ref{fig:ist_zustand}) regelmässig bereitstellt.
 \end{enumerate}
 
-Wobei der Lösungsansatz simpler und somit weniger fehleranfällig zu sein scheint. Dieser Ansatz kann, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
+Wobei der Lösungsansatz 1. simpler und weniger fehleranfällig zu sein scheint. Dieser Ansatz könnte, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
 
 \paragraph{Sicherung der Qualität:} Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
 häufig erst nach der Publikation entdeckt. Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Da keine inhaltliche Prüfung der Rohdaten gemacht werden kann, wäre es sicher hilfreich, wenn der Datenlieferant die Iterationen der Publizierung gleich selber machen könnte und dann nur noch Bescheid gibt, wenn sie seines Erachtens in Ordnung sind.
@@ -21,7 +21,7 @@ Die Rohdaten werden via Docker Image verarbeitet. Jedes Mal wenn das Image für 
 
 \subsection{Bewertungskriterien}
 \begin{tabular}{p{0.3\textwidth}p{0.7\textwidth}}
-    \textbf{Kosten einsparen} & Änderungen des Prozesses sollen nicht teurer sein, als die bisherige Lösung\\
+    \textbf{Kosten einsparen} & Änderungen des Prozesses sollen nicht teurer sein, als die bisherige Lösung.\\
     \textbf{Automatisierbar} & Die Lösung soll den Grad der Automatisierung möglichst weit vorantreiben und dadurch so wenig Personalaufwand wie möglich beanspruchen.\\
     \textbf{Einfach} & Ein neuer Mitarbeiter soll die Lösung rasch verstehen und warten können.\\
     \textbf{Bestehende Technologie} & Obwohl der Anwendungsfall anders ist, soll der Technologie Stack möglichst demjenigen der Microservices entsprechen.\\
@@ -31,15 +31,15 @@ Die Rohdaten werden via Docker Image verarbeitet. Jedes Mal wenn das Image für 
 Für den Architekturentscheid wurde auf eine Entscheidungsmatrix verzichtet. Dies Aufgrund der grossen Auswahl und der vielen Entscheidungen, die getroffen werden mussten. Die oben erwähnten Kriterien wurden in der Entscheidungsfindung mit einbezogen und weitere Argumente werden ausgeführt:
 
 \subsubsection{Verarbeitung auf Spot Instanzen}
-Der Autor ist auf drei Möglichkeiten gestossen, um Geodaten mit AWS Spot Instanzen zu verarbeiten: \emph{Direkt auf der Spot Instanz}, \emph{Kubernetes (EKS)} und \emph{AWS Batch}. Gerne hätte der Autor alle drei Lösungen als POC weiterverfolgt, aber die Zeit dazu reichte leider nicht. Aus diesem Grund beschränkt sich der Autor lediglich auf eine Beschreibung der drei Möglichkeiten. Wobei die erste Möglichkeit als POC umgesetzt wurde.
+Der Autor ist auf drei Möglichkeiten gestossen, um Geodaten mit AWS Spot Instanzen zu verarbeiten: \emph{Direkt auf der Spot Instanz}, \emph{Kubernetes (EKS)} und \emph{AWS Batch}. Gerne hätte der Autor alle drei Lösungen als Prototyp weiterverfolgt, aber die Zeit dazu reichte leider nicht. Aus diesem Grund beschränkt sich der Autor lediglich auf eine Beschreibung der drei Möglichkeiten. Wobei die erste Möglichkeit als Prototyp umgesetzt wurde.
 
 \paragraph{Direkt auf einer Spot Instanz:}
-Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Verarbeitung, weil die Daten im Prinzip wie bisher auf EC2 Instanz verarbeitet werden; mit dem Nachteil, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
+Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Verarbeitung, weil die Daten im Prinzip wie bisher auf einer EC2 Instanz verarbeitet werden; jedoch mit dem Nachteil, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
 
 Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil die Verarbeitung bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas Funktionierendes zu ändern\footnote{Security Maintenance bis 2028 \cite{Ubuntu2020}.}. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Verarbeitung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut stemmen.
 
-Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz\footnote{Eigentlich ein Bash Skript. Unter AWS als \emph{User Data} bezeichnet.} gewählt: Dieser Ansatz provisioniert den Server der Startup Phase. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Spezialisierung\footnote{Das Einrichten.} in einer Textdatei festgehalten wird und somit jederzeit nachvollziehbar ist. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
-Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche Initialisierung wurde an \emph{Ansible} übergeben. 
+Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz\footnote{Eigentlich ein Bash Skript. Unter AWS als \emph{User Data} bezeichnet.} gewählt: Dieser Ansatz provisioniert den Server der Startup Phase. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Anforderungen in einer Textdatei festgehalten und somit jederzeit nachvollziehbar sind. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
+Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche Initialisierung wird an \emph{Ansible} übergeben. 
 
 \paragraph{Kubernetes (EKS) auf Spot Instanzen erweitern}
 TODO: Weil die Microservices in Zukunft auf EKS laufen werden, wäre es sicher ein Möglichkeit, abzuklären, inwiefern sich eine Datenverarbeitung in dieser Umgebung einrichten lässt. In der Literatur hat der Autor folgende Elemente gefunden.

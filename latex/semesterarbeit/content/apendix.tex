@@ -23,11 +23,11 @@ EFS an eine EC2-Instanz gemountet und die Rohdaten wurden schon einmal dorthin k
 
 
 \subsection{Von der SPOT Instanz aus abfragen, was ihr Status ist}\label{appendix:restful}
-Von der Instanz aus können via RESTful API Metadaten der Instanz abgefragt werden. Bezüglich Determinierung einer Spot-Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht. Von da an, wo klar ist, dass die Instanz abgestellt werden wird, kann der Zeitpunkt ausgelesen werden.
+Von der Instanz aus können via RESTful API Metadaten der Instanz abgefragt werden. Bezüglich Interrupt einer Spot Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht. Von da an, wo klar ist, dass die Instanz abgestellt werden wird, kann der Zeitpunkt ausgelesen werden.
 \appendCode{bash}{Status der Instanz abfragen}{src/rest_instance_metadata.sh}
 
 \subsection{XML Testen}
-Einfaches Skript, um zu testen, ob alle XML-Dateien well-formed sind.
+Einfaches Skript, um zu testen, ob alle Dateien well-formed XML sind.
 \appendCode{python}{XML testen}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
 
 \subsection{Publikationsschritte in Ansible}

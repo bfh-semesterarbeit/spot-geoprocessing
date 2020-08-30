@@ -499,6 +499,7 @@ INPUT content/abstract.tex
 INPUT content/abstract.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso10.tfm
 INPUT template/toc.tex
 INPUT template/toc.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmss12.tfm
@@ -509,7 +510,6 @@ INPUT template/lof.tex
 INPUT template/lof.tex
 INPUT _build/Thesis.lof
 INPUT _build/Thesis.lof
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmsso10.tfm
 OUTPUT _build/Thesis.lof
 INPUT template/lot.tex
 INPUT template/lot.tex

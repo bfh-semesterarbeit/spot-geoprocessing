@@ -4,7 +4,7 @@ Die Anregungen aus dem Studium\footnote{CAS in Cloud Computing an der BFH Bern: 
 
 Im Betrieb hätte das Team und die IT Abteilung das nötige Know-How gehabt, um mit dieser Arbeit weiter zu kommen, als es jetzt der Fall ist. Aber der Autor hat sich bewusst dazu entschieden, die Arbeit möglichst selbständig zu realisieren und  diese Ressource zu schonen, indem er sie so wenig wie möglich genutzt hat. Es war für den Autor schon nur eine Hilfe, zu Wissen, dass die Möglichkeit einer Unterstützung da war. Dies führte dazu, dass der Autor Momente der Ratlosigkeit erleben musste\ref{har:perplexity}. Was nicht weiter schlimm war, da \textit{"Perplexity is the beginning of knowledge"} \autocite[33]{CloudNativ:1}.
 
-Bei der Auswahl der Spot-Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Der Autor war darüber erstaunt, dass ihm während der ganzen Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde. Während der Entwicklung wurde die Spot Flotte aufgrund eines EBS-Volumens auf eine bestimmte Availability-Zone beschränkt. Und nicht einmal mit dieser Einschränkung ist es zu einem Interrupt gekommen. Um das Verhalten bei Interrupts testen zu können, mussten die Spot-Instanzen somit mutmasslich terminiert werden.
+Bei der Auswahl der Spot Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Der Autor war darüber erstaunt, dass ihm während der gesamten Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde. Die Spot Flotte musste aufgrund eines gemounteten EBS-Volumens auf eine bestimmte Availability-Zone beschränkt werden. Nicht einmal mit dieser Einschränkung ist es zu einem Interrupts gekommen. Um das Verhalten bei Interrupts testen zu können, mussten die Spot-Instanzen somit mutmasslich terminiert werden.
 
 
 \subsection{Wirtschaftlichkeit}
@@ -35,10 +35,10 @@ Schaut man die Kosten relativ an, ist das Sparpotential enorm: 76\%! In absolute
 \subsubsection{Security}
 Bezüglich IAM hat der Prototyp noch technische Schulden. Dem Autor ist bewusst, dass folgende zwei Sicherheitslücken bezüglich Zugängen vorhanden sind:
 \paragraph{github.com:} Der Einfachheit halber wurde das Github Repository, auf welchem sich das Init-Skript und das Ansible Playbook befinden, öffentlich zugänglich gemacht (Abb. \ref{fig:ist_zustand}, Nr. 2). Dies ist nicht weiter problematisch, da der Code auf Github keine Passwörter etc. bekannt gibt. Aber es sind darin Informationen über die AWS Infrastruktur enthalten. Sauber wäre eine Implementation, die Github Credentials eines privaten Repositories verwaltet. Geeignet dazu wäre z.B. der AWS Secrets Manager \cite{Secrets2020}.
-\paragraph{AWS Key für S3:} Eigens für das Kopieren auf S3 wurde eine IAM Rolle angelegt, die nicht mehr darf, als auf S3 zu kopieren (Abb. \ref{fig:ist_zustand}, Nr. 6). Die Keys dazu wurden auf dem EFS-Volumen abgelegt. Dies ist sicher nicht ideal. Zwar ist die Sicherheitsgruppe des EFS ist zwar so konfiguriert, dass nur die Sicherheitsgruppe der EC2 Instanzen darauf Zugriff haben sollten, aber dennoch sollten keine unverschlüsselten Keys auf dem Filesystem herumliegen.
+\paragraph{AWS Key für S3:} Eigens für das Kopieren auf S3, dem Zugang für die Container Registry (ECR) und für das Mounten eines SSD Volumen wurde eine IAM Rolle angelegt, die nicht mehr darf, als die eben erwähnten Tätigkeiten (Abb. \ref{fig:ist_zustand}, Nr. 4,6 und das Mounten des Volumens). Der Zugangsschlüssel dazu wurden auf dem EFS Volumen abgelegt. Dies ist sicher nicht ideal. Zwar ist die Sicherheitsgruppe des EFS ist zwar so konfiguriert, dass nur die Sicherheitsgruppe der EC2 Instanzen darauf Zugriff haben sollten, aber dennoch sollten keine unverschlüsselten Keys auf dem Filesystem herumliegen.
 Um diese Sicherheitslücke zu schliessen, könnte eigens dafür eine IAM Rolle für die EC2 Instanz angelegt werden \cite{IAMEC2}.
 
-Sollte der Prototyp in den Betrieb überführt werden, müsste das IAM der swisstopo übernommen; und dieses Kapitel hätte sich erübrigt.
+Sollte der Prototyp in den Betrieb überführt werden, müsste man das IAM der swisstopo übernehmen; und dieses Kapitel hätte sich erübrigt.
 
 \subsubsection{Datenverarbeitung als Blackbox}
 Idealerweise wird die Datenverarbeitung in kleine parallelisierbare und in sich selber geschlossene Schritte unterteilt. Nach einem Interrupt der Instanz können dann die noch nicht abgeschlossenen Schritte fortgeführt werden. 
@@ -54,5 +54,5 @@ Mittelfristig wäre es schon nur aus Gründen des Kostensparens interessant, wen
 
 Sobald die swisstopo über eine Hybrid Cloud verfügt, könnte die Topografie neue Daten direkt auf das EFS schreiben. Dieser Event könnte getriggert werden, um eine Spot Instanz für die 3D Geodatenverarbeitung zu starten. Jeweils ca. 18 Stunden später wären die Daten im Web und die Topografie könnte diese auf der Testumgebung einsehen (Abb. \ref{fig:ist_zustand}, Nr. 7). Diesen Vorgang könnte die Topografie solange wiederholen, bis sie mit dem Resultat zufrieden ist.\\Ohne Hybrid Cloud müssten die Daten immer noch vom Intranet in die AWS VPC kopiert werden. Auch dieser Vorgang liesse sich einfach automatisieren.
 
-Persönlich hat dem Autor die Tour mit Spot Instanzen Spass gemacht. Die bei der Tour gemachten Erfahrungen waren ein guter Einstieg, um Services der AWS Cloud besser verstehen und nutzen zu können. Es wird sicher nicht bei dieser Tour bleiben.
+Persönlich hat dem Autor die Tour mit Spot Instanzen Spass gemacht. Die auf der Tour gemachten Erfahrungen waren ein guter Einstieg, um Services der AWS Cloud besser verstehen und nutzen zu können. Es wird sicher nicht bei dieser Tour bleiben.
 
