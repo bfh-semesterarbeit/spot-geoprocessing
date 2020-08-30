@@ -7,7 +7,7 @@ Im Betrieb hätte das Team und die IT Abteilung das nötige Know-How gehabt, um 
 Bei der Auswahl der Spot Instanz Aufgabe hat der Autor \emph{Flexible Workloads} gewählt. Der Autor war darüber erstaunt, dass ihm während der gesamten Entwicklungs- und Testphase nicht ein einziges Mal eine Instanz weggenommen wurde. Die Spot Flotte musste aufgrund eines gemounteten EBS-Volumens auf eine bestimmte Availability-Zone beschränkt werden. Nicht einmal mit dieser Einschränkung ist es zu einem Interrupts gekommen. Um das Verhalten bei Interrupts testen zu können, mussten die Spot-Instanzen somit mutmasslich terminiert werden.
 
 
-\subsection{Wirtschaftlichkeit}
+\subsection{Wirtschaftlichkeit}\label{kap:wirtschaftlichkeit}
 \paragraph{Personalstunden}
 Der Grad der Automatisierung konnte erheblich erhöht werden. Dadurch fallen Personalstunden\footnote{In unserem Team.} weg. Vor allem diese Kosten rechnen sich. Die Verarbeitungsschritte sind im Code abgebildet, was die Fehleranfälligkeit kleiner macht, als wenn Kommandos aus der Prozessdokumentation kopiert werden müssen. Um die IT Abteilung gänzlich zu Entlasten, müsste noch eine Rolle eingerichtet werden, die eine vordefinierte Spot Flottenanfrage steuern kann.
 \paragraph{Einsparungen Spot im Vergleich zu On-Demand}
