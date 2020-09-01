@@ -37,3 +37,10 @@ for i in /home/ubuntu/data_ssd/buildings/*.tar; do echo extracting ${i};tar -xzv
 
 
 /var/app/input/1272-33/1272-33.kml\n---------------------------------\nErrors:\n\tModel file "models/model_1056.dae"
+
+
+vol-066d5c65470dbbec1
+
+aws ec2 attach-volume --volume-id vol-066d5c65470dbbec1 --instance-id i-0dd232306c383a58f --device /dev/sdf
+
+curl http://169.254.169.254/latest/meta-data/instance-id
