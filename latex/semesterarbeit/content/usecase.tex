@@ -18,7 +18,7 @@ und des Viewers verantwortlich. Der ganze Technologie Stack wurde schon länger 
 die gesamte Architektur analysiert und überarbeitet, um eine gestaffelte Migration auf eine neue
 Lösung zu ermöglichen.
 Einige Rahmenbedingungen dieser zukünftigen Architektur sind bereits klar: Das Geoportal des
-Bundes wird weiterhin in der AWS Cloud betrieben werden, freie Software auf Linux\footnote{Wann immer möglich, freie Software \cite{FS2010}: OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}, die Migration wird vor allem über Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
+Bundes wird weiterhin in der AWS Cloud betrieben werden, bevorzugt mit freier Software auf Linux\footnote{Freie Software \cite{FS2010} wie OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}, die Migration wird vor allem über Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
 Integration wird AWS Codebuild/Pipeline zum Einsatz kommen.
 
 \newpage
@@ -36,7 +36,7 @@ Zu den Lanschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D.
 	\label{fig:bfh_3d}
 \end{figure}
 
-Seit der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und punkto Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
+Seit der Erstpublikation ist inzwischen etwas Zeit vergangen. Als die ersten Aktualisierungen der Daten anstanden, wurde den Beteiligten bewusst, dass sich diese nicht einfach so \emph{auf Knopfdruck} realisieren lässt: Seit der Erstpublikation hat es personelle Wechsel gegeben und bezüglich Dokumentation und Automatisierungsgrad wurden Lücken identifiziert.
 
 Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall für positive medienwirksame Reaktionen\footnote{Wie Bsp. auf watson.ch oder Twitter \cite{watson2018}.}. Früher oder später müssen diese abgebaut werden, weil es einen direkten Einfluss auf die Wartbarkeit des Produktes hat \cite{technischeschulden2010}.
 
@@ -66,20 +66,20 @@ Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-
 	\label{fig:spot}
 \end{figure}
 
-Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass einem die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
+Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass ihm die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
 
 Möchte man die EC2 Spot Instanzen für die Geodatenverarbeitung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
 
-Wie auf der Abbildung \ref{fig:spot} dargestellt, kann das Verhalten der Instanz bei einem Interrupt\footnote{Wenn Amazon die Spot Instanz für einen anderen Zweck beanspruchen möchte, die wegnimmt.} definiert werden. Es besteht dabei sogar die Möglichkeit eines \emph{Hibernate}, dass der Zustand des RAMs auf der Festplatte persistiert wird.
+Wie auf der Abbildung \ref{fig:spot} dargestellt, kann das Verhalten der Instanz bei einem Interrupt\footnote{Wenn Amazon die Spot Instanz für einen anderen Zweck beanspruchen möchte, die wegnimmt.} definiert werden. Es besteht dabei sogar die Möglichkeit eines \emph{Hibernate}, das den Zustand des RAMs vor dem Unterbruch auf der Festplatte abspeichert.
 
-Diese 2 minütige Vorankündigung eines Intterupts kann auch via RESTful Abfrage\footnote{EC2 Spot Instance Interruption Notice, eine HTTP Abfrage: Im Anhang \ref{appendix:restful} hat es ein Beispiel dazu.} von der Instanz aus abgefragt werden.
+Diese 2 minütige Vorankündigung eines Interrupts kann auch via RESTful Abfrage\footnote{EC2 Spot Instance Interruption Notice, eine HTTP Abfrage: Im Anhang \ref{appendix:restful} hat es ein Beispiel dazu.} von der Instanz aus abgefragt werden.
 
 Diese Vorankündigung lässt sich auch via AWS CLI abfragen. In einem grösseren Setup könnte das Signal der Vorankündigung auch mit dem AWS Überwachungstool \emph{CloudWatch} verarbeitet werden.
 
 
 \subsection{Ist-Zustand der 3D Datenpublikation}
 \subsubsection{3D Datenpublikation}
-Das Aufzeigen des Ist-Zustandes der 3D Datenpublikation soll helfen sich einen Überblick, eine Ausgangslage, zu verschaffen. Es bildet die Grundlage, um die Frage zu beantworten, welche Arbeiten erledigt werden müssen, um die 3D Daten im Web zu publizieren? Welche Arbeitsschritte könnten automatisiert werden? 
+Das Aufzeigen des Ist-Zustandes soll helfen, einen generellen Überblick der Aufgaben und Teile zu schaffen, die es braucht, um 3D Daten zu Publizieren. Es bildet die Grundlage, um die Frage zu beantworten, welche Arbeiten erledigt werden müssen, um die 3D Daten im Web zu publizieren? Welche Arbeitsschritte könnten automatisiert werden? 
 
 Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D Datenpublikation erteilt wurde\footnote{Vom Bereich Topografie.}, müssen zurzeit folgende Schritte, die in der Abbildung \ref{fig:ist_zustand} referenziert sind, erledigt werden:
 
@@ -92,13 +92,13 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 
 \begin{enumerate}
 \item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA (beides XML).} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
-\item Da es sich um ca. 8 Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
-\item Kopieren der komprimierten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren.}) kopiert\footnote{Via \emph{rsync}.}.
-\item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI.} bereitzustellen.
-\item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
-\item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln in das Web-Format \emph{Cesium3DTiles}.}.
+\item Da es sich um ca. 8 Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal komprimiert, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
+\item Kopieren\footnote{Via \emph{rsync}.} der komprimierten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network.}).
+\item Parallel dazu wird die IT via Ticket gebeten, eine Instanz mit entsprechendem Image\footnote{Eine EC2 Instanz aus einem bereits vorhandenen AMIs.} bereitzustellen.
+\item Kopieren und Entpacken der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
+\item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln in das Web Format \emph{Cesium3DTiles}.}.
 \item Kopieren der Web-optimierten Daten auf S3.
-\item Die Daten visualisieren, um inhaltlich testen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io}).}, dass auf die 3D Tiles zugreift.
+\item Die Daten visualisieren, um sie inhaltlich prüfen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io}).}, dass auf die 3D Tiles zugreift.
 \end{enumerate}
 
 \subsubsection{Aufwand der Verarbeitung}
@@ -106,15 +106,15 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 Folgende Schritte sind besonders aufwendig:
 \begin{itemize}
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Komprimieren (Packen und Entpacken) der Rohdaten dauert lange.
-\item Es kommt immer mal wieder vor, dass Daten korrupt sind, was zu einer Nachlieferung führt, mit der Gefahr, dass es mit Versionen der Lieferung zu einem Durcheinander kommen könnte.
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Verarbeitung eine EC2 Instanz mit EFS bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Nebst der Bemühung der IT, muss auf der Instanz selber anschliessend das eine und andere manuell installiert und konfiguriert werden.
+\item Es kann vorkommen, dass Daten korrupt sind. Dies führt zu Teillieferungen, mit der Gefahr, dass zu einem Durcheinander der einzelnen Teillieferungen kommen könnte.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Verarbeitung eine EC2 Instanz mit Volumen bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Ausserdem muss auf der Instanz noch das eine oder andere manuell installiert und konfiguriert werden.
 \end{itemize}
 
 \subsubsection{Technische Komponenten}
 Auflistung der technischen Komponenten:
 \begin{itemize}
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2., 3. und 5.}: Das Komprimieren und Kopieren der Rohdaten erfolgt mit Linux Bordmitteln (\emph{cp}, \emph{rsync}, \emph{tar})
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4. und 7.}: Erfolgen via AWS CLI
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2., 3. und 5.}: Das Komprimieren und Kopieren der Rohdaten erfolgt mit Linux Bordmitteln (\emph{cp}, \emph{rsync}, \emph{tar}).
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4. und 7.}: Erfolgen via AWS CLI.
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 6.}: Via Docker. Der Container wurde von der Firma Analytical Graphics Inc. \cite{AGI2010} bereitgestellt. Das Tool, das die Rohdaten in ein Web-Format umwandelt, wird mit Node.js ausgeführt.
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 7.}: Ein Projekt, um die Daten im Browser betrachten und inhaltlich Testen zu können, erfolgt über die Webseite codepen.io.
 \end{itemize}
