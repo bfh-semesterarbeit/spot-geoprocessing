@@ -12,7 +12,7 @@ Wie bereits erwähnt, können auf dem Viewer ca. 800 Themen wie Wanderwege, Sola
 Aufbereitung der Daten fürs Web sind unterschiedlich. Einige Daten werden manuell aufwändig aufbereitet, andere
 stündlich automatisch nachgeführt.
 
-\subsection{Die Web Services geben den Technologie Stack vor}
+\subsection{Die Web Services geben den Technologie Stack vor}\label{kap:webservices}
 Nebst der Publikation der Daten ist unser Team für den Betrieb und der Weiterentwicklung der Web Services
 und des Viewers verantwortlich. Der ganze Technologie Stack wurde schon länger nicht mehr grundlegend erneuert. Zurzeit wird
 die gesamte Architektur analysiert und überarbeitet, um eine gestaffelte Migration auf eine neue
@@ -92,7 +92,7 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 
 \begin{enumerate}
 \item Die Rohdaten\footnote{Das Format der Rohdaten ist KML/COLLADA (beides XML).} werden vom Auftraggeber (Bereich Topografie) auf einem NAS bereitgestellt.
-\item Da es sich um Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
+\item Da es sich um ca. 8 Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal gezippt, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
 \item Kopieren der komprimierten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network. Ein Kopieren.}) kopiert\footnote{Via \emph{rsync}.}.
 \item Parallel dazu wird die IT via Ticket gebeten einen Server mit dem entsprechenden Image\footnote{Eine EC2 Instanz \emph{eine m4.10xlarge} aus einem bereits vorhandenes AMI.} bereitzustellen.
 \item Kopieren und Entzippen der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.

@@ -2163,10 +2163,15 @@
     <bcf:citekey order="15">AmazonAWSSpot:1</bcf:citekey>
     <bcf:citekey order="16">AGI2010</bcf:citekey>
     <bcf:citekey order="17">Ubuntu2020</bcf:citekey>
-    <bcf:citekey order="18">FreeTier2020</bcf:citekey>
+    <bcf:citekey order="18">Batch2020</bcf:citekey>
     <bcf:citekey order="19">CloudNativ:1</bcf:citekey>
-    <bcf:citekey order="20">Secrets2020</bcf:citekey>
-    <bcf:citekey order="21">IAMEC2</bcf:citekey>
+    <bcf:citekey order="20">CloudNativ:1</bcf:citekey>
+    <bcf:citekey order="21">9781788390071</bcf:citekey>
+    <bcf:citekey order="22">FreeTier2020</bcf:citekey>
+    <bcf:citekey order="23">9781484251003</bcf:citekey>
+    <bcf:citekey order="24">CloudNativ:1</bcf:citekey>
+    <bcf:citekey order="25">Secrets2020</bcf:citekey>
+    <bcf:citekey order="26">IAMEC2</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="anyt/global/" type="entry" sortscheme="anyt" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
