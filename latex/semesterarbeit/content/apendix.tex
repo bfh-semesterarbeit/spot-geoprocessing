@@ -2,7 +2,7 @@
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.95\textwidth]{kanban}
-	\caption{Klassisches Kanban auf \emph{github.com}}
+	\caption{Klassisches Kanban auf \emph{github.com}.}
 	\label{fig:Klassisches Kanban}
 \end{figure}
 
@@ -24,15 +24,15 @@ EFS an eine EC2-Instanz gemountet und die Rohdaten wurden schon einmal dorthin k
 
 \subsection{Von der SPOT Instanz aus abfragen, was ihr Status ist}\label{appendix:restful}
 Von der Instanz aus können via RESTful API Metadaten der Instanz abgefragt werden. Bezüglich Interrupt einer Spot Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht. Von da an, wo klar ist, dass die Instanz abgestellt werden wird, kann der Zeitpunkt ausgelesen werden.
-\appendCode{bash}{Status der Instanz abfragen}{src/rest_instance_metadata.sh}
+\appendCode{bash}{Status der Instanz abfragen.}{src/rest_instance_metadata.sh}
 
 \subsection{XML Testen}
 Einfaches Skript, um zu testen, ob alle Dateien well-formed XML sind.
-\appendCode{python}{XML testen}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
+\appendCode{python}{Datei auf well-formed XML testen.}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
 
-\subsection{Publikationsschritte in Ansible}
+\subsection{Geodatenverarbeitunsschritte in Ansible}
 Der ganze Code zum hier aufgelisteten Ausschnitt kann auf \href{https://github.com/bfh-semesterarbeit/spot-geoprocessing}{github.com} eingesehen, resp. verwendet, werden:
-\appendCode{make}{Nebst dem Setup werden die drei Publikationsschritte mit Ansible gesteuert.}{src/up-and-running-dataprocessing/ansible/playbooks/processing.yml}
+\appendCode{make}{Nebst dem Setup werden die vier hier Publikationsschritte von Ansible gesteuert.}{src/up-and-running-dataprocessing/ansible/playbooks/processing.yml}
 
 
 %\section{Für die Semesterarbeit verwendete Software}
