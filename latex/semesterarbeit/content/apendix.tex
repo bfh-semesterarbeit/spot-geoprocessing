@@ -26,9 +26,9 @@ EFS an eine EC2-Instanz gemountet und die Rohdaten wurden schon einmal dorthin k
 Von der Instanz aus können via RESTful API Metadaten der Instanz abgefragt werden. Bezüglich Interrupt einer Spot Instanz kann der Zustand \emph{none}, \emph{hibernate}, \emph{stop} oder \emph{terminate} sein. \emph{none}, wenn nichts ansteht. Von da an, wo klar ist, dass die Instanz abgestellt werden wird, kann der Zeitpunkt ausgelesen werden.
 \appendCode{bash}{Status der Instanz abfragen.}{src/rest_instance_metadata.sh}
 
-\subsection{XML Testen}
-Einfaches Skript, um zu testen, ob alle Dateien well-formed XML sind.
-\appendCode{python}{Datei auf well-formed XML testen.}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
+\subsection{Well-formed XML}
+Einfaches Skript zum testen, ob alle Dateien well-formed XML sind.
+\appendCode{python}{XML testen.}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
 
 \subsection{Geodatenverarbeitunsschritte in Ansible}
 Der ganze Code zum hier aufgelisteten Ausschnitt kann auf \href{https://github.com/bfh-semesterarbeit/spot-geoprocessing}{github.com} eingesehen, resp. verwendet, werden:
