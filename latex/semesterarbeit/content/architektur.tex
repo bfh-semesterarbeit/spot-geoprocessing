@@ -1,7 +1,7 @@
 \section{Architektur}
 
 \subsection{Analyse des Ist-Zustandes}
-\subsubsection{Bereitstellung der Rohdaten und Sicherstellung dessen Qualität}\label{kap:sicherstellung_qualitaet}
+\subsubsection{Bereitstellung der Rohdaten und Sicherstellung deren Qualität}\label{kap:sicherstellung_qualitaet}
 Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwand_prozessierung} geht hervor, dass vor allem das Bereitstellen der Rohdaten und das Sicherstellen dessen Qualität aufwändig ist. 
 
 \paragraph{Das Bereitstellen der Rohdaten} nimmt aufgrund der Datenmenge\footnote{Weil es sich um mehrere Millionen Dateien handelt.} viel Zeit in Anspruch. Hier gäbe es folgende zwei Lösungsansätze:
@@ -10,7 +10,7 @@ Basierend auf der Aufwandeinschätzung des Ist-Zustandes des Kapitels \ref{aufwa
 \item Automatischer Prozess via Cronjob oder Trigger, der die Kopierschritte (Abb. \ref{fig:ist_zustand}, Schritt 3) regelmässig bereitstellt.
 \end{enumerate}
 
-Wobei der Lösungsansatz 1. simpler und weniger fehleranfällig zu sein scheint. Dieser Ansatz könnte, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
+Wobei der Lösungsansatz 1., weil die Rohdaten direkt bereitstellt werden, simpler und weniger fehleranfällig zu sein scheint. Dieser Ansatz könnte, sobald die swisstopo eine Hybrid Cloud hat, weiterverfolgt werden.
 
 \paragraph{Sicherung der Qualität:} Weil es dem Lieferanten an Tools fehlt, um die bereitgestellten Daten inhaltlich zu Prüfen, werden Fehler 
 häufig erst nach der Publikation entdeckt. Dies sicherlich auch, weil die Daten im Web an ein breites Publikum gelangen. Da keine inhaltliche Prüfung der Rohdaten gemacht werden kann, wäre es sicher hilfreich, wenn der Datenlieferant die Iterationen der Publizierung gleich selber machen könnte und dann nur noch Bescheid gibt, wenn sie seines Erachtens in Ordnung sind.
@@ -38,7 +38,7 @@ Bezüglich Automatisierung konnte auf der Basis des Ist-Zustandes, aufgezeigt we
 \paragraph{Direkt auf einer Spot Instanz:}
 Diese Möglichkeit bedingt nur geringe Anpassungen der bisherigen Verarbeitung, weil die Daten im Prinzip wie bisher auf einer EC2 Instanz verarbeitet werden; jedoch mit der Herausforderung, dass diese jederzeit durch eine andere Instanz ersetzt werden könnte.
 
-Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil die Verarbeitung bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas Funktionierendes zu ändern\footnote{Security Maintenance bis 2028 \cite{Ubuntu2020}.}. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Verarbeitung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut stemmen.
+Der Autor hat sich bei der Auswahl der Images\footnote{AMI: Amazon Machine Image.} für \emph{Ubuntu Server 18.04 LTS} entschieden. Dies weil die Verarbeitung bisher auf Ubuntu gelaufen ist und weil er keinen Grund sieht, etwas Funktionierendes zu ändern\footnote{Security Maintenance bis 2028 \cite{Ubuntu2020}.}. Dasselbe Argument gilt für die Wahl der Dimensionierung des Servers: Ein Server mit 200 GB SSD Festplatte, 16 CPUs und 60 GByte Arbeitspeicher konnte die Verarbeitung der 3D Daten\footnote{Gebäude, Bäume und Namen.} gut bewältigen.
 
 Bei der Provisionierung\footnote{Bereitstellung} des Servers wurde der \emph{"Cloud-init"} Ansatz\footnote{Eigentlich ein Bash Skript. Unter AWS als \emph{User Data} bezeichnet.} gewählt: Dieser Ansatz provisioniert die Instanz während der Startup Phase. Dies hat gegenüber einem eigenen AMI den Vorteil, dass die Anforderungen in einer Textdatei festgehalten und somit jederzeit nachvollziehbar sind. Ausserdem muss bei einem Update des Basis Images kein neues Image gebaut werden.
 Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche Initialisierung wird an \emph{Ansible} übergeben. 

@@ -19,13 +19,13 @@ Als Setup für die Spot Flottenanfrage wurde ein sogenanntes Launch Template mit
 Wie im Kapitel \ref{kap:bugdet_instanzen} beschrieben, sind Spot Instanzen so günstig, weil sie einem jederzeit weggenommen werden könnten. Also muss die Datenverarbeitung mit dem Handling von Interrupts umgehen können. 
 Der Einfachheit halber hat der Autor gänzlich auf das \textit{Horchen eines bevorstehenden Interrupts} via RESTful Abfrage (In Anhang \ref{appendix:restful} beschrieben) oder \emph{CloudWatch} verzichtet und hat stattdessen die Datenverarbeitung als Serie betrachtet und in Schritte unterteilt. Sobald ein Schritt erledigt wird, wird dies auf dem EFS Volumen in einer Textdatei festgehalten. Falls es zu einem Interrupt kommen sollte, wird von der Spot Flotte die nächste Instanz bereitgestellt und die Publizierung macht bei dem Schritt weiter, der zuletzt in der Textdatei festgehalten wurde (Abbildung \ref{fig:ist_zustand}, Nr. 5).
 
-\subsection{Die Datenverarbeitung als Code}
+\subsection{Datenverarbeitung als Code}
 Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht mit einem neuen AMI.}, lag es auf der Hand, auch gleich dieselbe Technologie für die Steuerung der gesamten Datenverarbeitung zu verwenden (Nr. 3). 
 Viele Annehmlichkeiten, wie die Nähe zur Shell und Python, das Logging und der deklarative Code zeigten sich in der Realisierung als hilfreich. Eines der ersten Kommandos, welches das Initialisierungsskript ausführt, ist das klonen des Codes von github.com (Abb. \ref{fig:ist_zustand}, Nr. 2). Das Init-Skript wie auch das Ansible Playbook können auf \href{https://github.com/bfh-semesterarbeit/up-and-running-dataprocessing}{github.com/bfh-semesterarbeit} eingesehen werden.
 
 
 \subsection{Testen der Datenstruktur}
-Wie in Kapitel \ref{kap:sicherstellung_qualitaet} erwähnt, könnte die Datenverarbeitung bereits mit einfachen Bordmitteln vereinfacht werden. Es ist auch schon vorgekommen, dass die gelieferten Rohdaten selbst fehlerhaft waren. Da alle gelieferten Rohdaten (KML und Collada) in XML geschrieben sind, wurde beschlossen, einen kleinen Test mit grosser Wirkung in den automatischen Publikationsprozess mit einzubeziehen. Dieser Test macht nichts anderes, als die Dateien auf well-formed XML zu testen. 
+Wie in Kapitel \ref{kap:sicherstellung_qualitaet} erwähnt, ist es auch schon vorgekommen, dass die gelieferten Rohdaten korrupt waren. Da alle gelieferten Rohdaten (KML und Collada) in XML geschrieben sind, wurde beschlossen, einen kleinen Test mit grosser Wirkung in den automatischen Publikationsprozess mit einzubeziehen. Dieser Test macht nichts anderes, als die Dateien auf well-formed XML zu testen. 
 Dieser Test schreibt den Namen aller fehlerhaften XML Dateien in eine Liste. Nach dem Testen wird die Länge dieser Liste überprüft und falls diese nicht leer ist, wird der gesamte Datenverarbeitung gestoppt. Diese Liste kann dann dem Auftraggeber zur Nachbearbeitung der fehlerhaften Daten ausgehändigt werden. Dieser Schritt passiert innerhalb Schritt Nr. 3 der  Abbildung \ref{fig:ist_zustand}.
 
 \subsection{Datenverarbeitung}
@@ -53,5 +53,5 @@ Dieser Test wurde iterativ umgesetzt und der Code wurde bei Fehlern fortlaufend 
 
 
 \subsubsection{Belastungstest}\label{kap:belastungstest}
-Der komplette Rohdatensatz, alle (erfassten) Gebäude der Schweiz, wurde verarbeitet. Dieser Test war sozusagen die Probe aufs Exempel. Bezüglich Anforderungen an die Rechnerleistung konnte auf Erfahrungswerte aufgebaut werden. Die Anforderungen an die Instanz und dem gemounteten SSD Volumen haben gereicht. Dieser Test wurde auch dafür genutzt, den Output des Prototypen inhaltlich begutachten zu können, wie im vorhergehenden Kapitel (\ref{kap:inhaltlich} erwähnt. Aber auch die Erkenntnisse zur Wirtschaftlichkeit, Kap. \ref{kap:wirtschaftlichkeit}, wurden aus diesem Test abgeleitet.
+Der komplette Rohdatensatz, alle (erfassten) Gebäude der Schweiz, wurde verarbeitet. Dieser Test war sozusagen die Probe aufs Exempel. Bezüglich Anforderungen an die Rechnerleistung konnte auf Erfahrungswerte aufgebaut werden. Die Anforderungen an die Instanz und dem gemounteten SSD Volumen haben gereicht. Dieser Test wurde auch dafür genutzt, den Output des Prototypen inhaltlich begutachten zu können, wie im vorhergehenden Kapitel (\ref{kap:inhaltlich}) erwähnt. Aber auch die Erkenntnisse zur Wirtschaftlichkeit, Kapitel \ref{kap:wirtschaftlichkeit}, wurden aus diesem Test abgeleitet.
 

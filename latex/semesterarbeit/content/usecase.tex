@@ -42,7 +42,7 @@ Es gibt immer gute Gründe für \emph{technische Schulden}, wie in diesem Fall f
 
 \section{Der Use Case}
 \subsection{Problemstellung}
-Es ist der swisstopo schon lange ein Anliegen, die Publikationvorgänge von Geodaten zu optimieren. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
+Es ist der swisstopo schon lange ein Anliegen, die Publikationsvorgänge von Geodaten zu optimieren. Wann immer möglich, soll der Automatisierungsgrad erhöht werden.
 
 Besonders aufwändig erweist sich zurzeit die Publikation von 3D Daten. Die manuelle Publikation
 der 3D Daten benötigt eigene Tools, die auf einem performanten und somit teuren Rechner laufen
@@ -66,7 +66,7 @@ Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-
 	\label{fig:spot}
 \end{figure}
 
-Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, damit AWS nicht genutzte EC2-Kapazitäten doch noch verkaufen kann. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass ihm die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann.
+Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, um die Auslastung von EC2 Kapazitäten zu steigern. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass ihm die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann \cite{AmazonAWSSpot:1}.
 
 Möchte man die EC2 Spot Instanzen für die Geodatenverarbeitung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
 
