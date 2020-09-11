@@ -47,8 +47,8 @@ Die Initialisierungsskript wurde auf ein Minimum beschränkt und die eigentliche
 AWS Batch ist ein interessanter Ansatz zur Geodatenverarbeitung. Der Dienst wurde für genau diese Art von Aufgaben gebaut. Verarbeitungen, oder Teile davon, können auch auf Spot Instanzen erledigt werden. Es kann sogar definiert werden, ab welchem Preis der Batch Job gestartet werden soll. Für den Use Case geht der Autor davon aus, dass folgende Elemente in AWS Batch definiert werden müssten \cite{Batch2020}: 
 \begin{itemize}
 \item{\textbf{Compute Environment(s):} Die Anforderungen an den Rechner.}
-\item{\textbf{Job Queue(s):}: Da sich der Datenumbau nicht ohne weiteres Parallelisieren lässt, wäre dies lediglich die Verbindung zum Compute Environment.}
-\item{\textbf{Job Definition(s):}} Der parametrisierte Aufruf des AGI-Containers.
+\item{\textbf{Job Queue(s):} Da sich der Datenumbau nicht ohne weiteres Parallelisieren lässt, wäre dies lediglich die Verbindung zum Compute Environment.}
+\item{\textbf{Job Definition(s):} Der parametrisierte Aufruf des AGI-Containers.}
 \end{itemize}
 Da die Semesterarbeit sich vor allem mit Spot Instanzen generell befasst, die Zeit beschränkt ist und die Einstiegshürde in AWS Batch dem Autor relativ komplex erscheint, wurde von dieser Möglichkeit abgesehen. Falls die Zeit einmal reichen sollte, würde der Autor gerne folgende Demo an die Geodatenverarbeitung anpassen:
 \href{https://aws.amazon.com/de/blogs/compute/creating-a-simple-fetch-and-run-aws-batch-job/}{https://aws.amazon.com/de/blogs/}.
