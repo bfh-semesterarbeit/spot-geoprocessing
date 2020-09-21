@@ -18,7 +18,7 @@ und des Viewers verantwortlich. Der ganze Technologie Stack wurde schon länger 
 die gesamte Architektur analysiert und überarbeitet, um eine gestaffelte Migration auf eine neue
 Lösung zu ermöglichen.
 Einige Rahmenbedingungen dieser zukünftigen Architektur sind bereits klar: Das Geoportal des
-Bundes wird weiterhin in der AWS Cloud betrieben werden, bevorzugt mit freier Software auf Linux\footnote{Freie Software \cite{FS2010} wie OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}, die Migration wird vor allem über Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon Elsatic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
+Bundes wird weiterhin in der AWS Cloud betrieben werden, bevorzugt mit freier Software auf Linux\footnote{Freie Software \cite{FS2010} wie OpenLayers, PostGIS, Debian, Mapserver, Python Frameworks, Kubernetes etc.}, die Migration wird vor allem über Microservices gestaffelt erfolgen, diese Services werden als Docker Container laufen, Amazon Elastic Kubernetes Service wird die Orchestrierung der Container übernehmen; und für Continuous
 Integration wird AWS Codebuild/Pipeline zum Einsatz kommen.
 
 \newpage
@@ -26,7 +26,7 @@ Integration wird AWS Codebuild/Pipeline zum Einsatz kommen.
 \subsection{Exkurs 3D Daten}
 Die swisstopo erfasst und aktualisiert Daten mit einem räumlichen Bezug. Diese Geodaten sind die Basis für die Ableitung in eine Vielzahl von Produkten, wie die Landeskarten 1:25'000. Nebst Karten gibt es unter anderem die Produktpalette der Landschaftsmodelle. Diese geben die Objekte der Landschaft im flexiblen Vektorformat wieder. Sie bestehen aus thematischen Ebenen (Bsp. Gebäude). Jede Ebene umfasst georeferenzierte Punkt-, Linien-, Flächen- oder 3D Objekte. Jedes Objekt enthält Attribute und Beziehungen \cite{toposhop2010}.
 
-Zu den Lanschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D. Im Viewer wird eine Auswahl von Themen aus eben diesen Landschaftsmodellen dargestellt: Zurzeit Gebäude, Bäume, Seilbahnen, Namen und das Terrain. Vor wenigen Jahren wurden diese 3D Daten mit einem grossen Effort medienwirksam publiziert.
+Zu den Landschaftsmodellen gehören Produkte wie swissTLM3D und swissBuildings3D. Im Viewer wird eine Auswahl von Themen aus eben diesen Landschaftsmodellen dargestellt: Zurzeit Gebäude, Bäume, Seilbahnen, Namen und das Terrain. Vor wenigen Jahren wurden diese 3D Daten mit einem grossen Effort medienwirksam publiziert.
 
 \begin{figure}[H]
 	\centering
@@ -53,7 +53,7 @@ vorne gestartet werden.
 Auch dem Hersteller der 3D Daten (dem Bereich Topografie) wäre es ein Anliegen, wenn er diese
 Daten selbst automatisch publizieren und prüfen könnte.
 
-Einerseits soll in dieser Arbeit mittels Prototyp aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Verarbeitung Budget Instanzen\footnote{Amazon Spot Instanzen} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen.} verwendet werden können und wie deren Einsatz aussehen könnte.
+Einerseits soll in dieser Arbeit mittels eines Prototyps aufgezeigt werden, wie der Automatisierungsgrad erhöht werden könnte. Andererseits soll untersucht werden, ob für die Verarbeitung Budget Instanzen\footnote{Amazon Spot Instanzen} anstelle von On-Demand Instanzen\footnote{Herkömmliche EC2 Instanzen.} verwendet werden können und wie deren Einsatz aussehen könnte.
 
 \subsubsection{Budget Instanzen}\label{kap:bugdet_instanzen}
 Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-Instances können Sie die Vorteile nicht genutzter EC2-Kapazitäten in der AWS Cloud nutzen. Spot-Instances sind mit einem Rabatt von bis zu\\ 90\% im Vergleich zum On-Demand-Preis verfügbar. Sie können Spot-Instances für diverse statuslose, fehlertolerante und flexible Anwendungen verwenden. Dazu zählen unter anderem Big-Data-Anwendungen, auf Containern ausgeführte Workloads, CI/CD, Webserver-Anwendungen, HPC-Anwendungen (High-Performance Computing) sowie Test- und Entwicklungs-Workloads."} \cite{AmazonAWSSpot:1}.
@@ -62,17 +62,17 @@ Amazon preist Budget Instanzen folgendermassen an: \textit{"Mit Amazon EC2 Spot-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.70\textwidth]{spot}
-	\caption{So funktioniert das Ausleihen von Bugdet (SPOT) Instanzen}
+	\caption{So funktioniert das Ausleihen von Budget (SPOT) Instanzen}
 	\label{fig:spot}
 \end{figure}
 
-Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, um die Auslastung von EC2 Kapazitäten zu steigern. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass ihm die Instanz innerhalb von 2 minütiger Vorankündigung weggenommen werden kann \cite{AmazonAWSSpot:1}.
+Das Verkaufsargument \emph{90\%} Rabatt ist eine Ansage: Eine Preis-Aktion, ein Budget Produkt, um die Auslastung von EC2 Kapazitäten zu steigern. Der Konsument gibt viel weniger aus, mit dem Nachteil, dass ihm die Instanz innerhalb von 2-minütiger Vorankündigung weggenommen werden kann \cite{AmazonAWSSpot:1}.
 
 Möchte man die EC2 Spot Instanzen für die Geodatenverarbeitung einsetzen, muss also ein Weg gefunden werden, um mit diesen Unterbrüchen umgehen zu können.
 
 Wie auf der Abbildung \ref{fig:spot} dargestellt, kann das Verhalten der Instanz bei einem Interrupt\footnote{Wenn Amazon die Spot Instanz für einen anderen Zweck beanspruchen möchte, die wegnimmt.} definiert werden. Es besteht dabei sogar die Möglichkeit eines \emph{Hibernate}, das den Zustand des RAMs vor dem Unterbruch auf der Festplatte abspeichert.
 
-Diese 2 minütige Vorankündigung eines Interrupts kann auch via RESTful Abfrage\footnote{EC2 Spot Instance Interruption Notice, eine HTTP Abfrage: Im Anhang \ref{appendix:restful} hat es ein Beispiel dazu.} von der Instanz aus abgefragt werden.
+Diese 2-minütige Vorankündigung eines Interrupts kann auch via RESTful Abfrage\footnote{EC2 Spot Instance Interruption Notice, eine HTTP Abfrage: Im Anhang \ref{appendix:restful} hat es ein Beispiel dazu.} von der Instanz aus abgefragt werden.
 
 Diese Vorankündigung lässt sich auch via AWS CLI abfragen. In einem grösseren Setup könnte das Signal der Vorankündigung auch mit dem AWS Überwachungstool \emph{CloudWatch} verarbeitet werden.
 
@@ -95,7 +95,7 @@ Eine Datenpublikation läuft folgendermassen ab: Sobald der Auftrag für eine 3D
 \item Da es sich um ca. 8 Millionen Dateien handelt, werden diese je Kartenblatt\footnote{Blatteinteilung: Die swisstopo arbeitet viel nach Blatteinteilung nach Kartenblättern, hier ein Beispiel: \href{https://s.geo.admin.ch/8b5f3f6721}{map.geo.admin.ch}.} erst einmal komprimiert, um so (weil bedeutend weniger Dateien) schneller kopiert werden zu können.
 \item Kopieren\footnote{Via \emph{rsync}.} der komprimierten Dateien vom swisstopo Netzwerk in die Amazon Cloud (AWS VPC\footnote{AWS: Amazon Web Services, VPC: Virtual Private Network.}).
 \item Parallel dazu wird die IT via Ticket gebeten, eine Instanz mit entsprechendem Image\footnote{Eine EC2 Instanz aus einem bereits vorhandenen AMIs.} bereitzustellen.
-\item Kopieren und Entpacken der Rodaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
+\item Kopieren und Entpacken der Rohdaten auf die gemountete Festplatte\footnote{Ein EBS Volumen.} des Servers.
 \item Die Daten auf dem Server via Docker verarbeiten\footnote{Umwandeln in das Web Format \emph{Cesium3DTiles}.}.
 \item Kopieren der Web-optimierten Daten auf S3.
 \item Die Daten visualisieren, um sie inhaltlich prüfen zu können. Ein Codepen Projekt\footnote{SaaS: Eine Webseite, um Front-End Code zu schreiben, zu testen, und bereitzustellen (\href{https://codepen.io}{codepen.io}).}, dass auf die 3D Tiles zugreift.
@@ -107,7 +107,7 @@ Folgende Schritte sind besonders aufwendig:
 \begin{itemize}
 \item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 2. und 5.}: Das Kopieren / Komprimieren (Packen und Entpacken) der Rohdaten dauert lange.
 \item Es kann vorkommen, dass Daten korrupt sind. Dies führt zu Teillieferungen, mit der Gefahr, dass zu einem Durcheinander der einzelnen Teillieferungen kommen könnte.
-\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}:Unsere IT muss für die Verarbeitung eine EC2 Instanz mit Volumen bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Ausserdem muss auf der Instanz noch das eine oder andere manuell installiert und konfiguriert werden.
+\item \textbf{Abb. \ref{fig:ist_zustand}, Schritt 4.}: Die IT muss für die Verarbeitung eine EC2 Instanz mit entsprechendem Volumen bereitzustellen. Um laufende Kosten zu verringern, wird diese Instanz nach getaner Arbeit\footnote{Der Verarbeitung.} wieder gestoppt. Falls mit den Daten etwas nicht in Ordnung ist, muss dieser Schritt von der IT wiederholt werden. Ausserdem muss auf der Instanz noch das eine oder andere manuell installiert und konfiguriert werden.
 \end{itemize}
 
 \subsubsection{Technische Komponenten}

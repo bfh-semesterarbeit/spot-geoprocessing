@@ -21,7 +21,7 @@ Der Einfachheit halber hat der Autor gänzlich auf das \textit{Horchen eines bev
 
 \subsection{Datenverarbeitung als Code}
 Mit der Entscheidung, die Spot Instanz via \emph{Cloud-Init}-Ansatz (Abb. \ref{fig:ist_zustand}, Nr. 1) mit Ansible zu Provisionieren\footnote{Und nicht mit einem neuen AMI.}, lag es auf der Hand, auch gleich dieselbe Technologie für die Steuerung der gesamten Datenverarbeitung zu verwenden (Nr. 3). 
-Viele Annehmlichkeiten, wie die Nähe zur Shell und Python, das Logging und der deklarative Code zeigten sich in der Realisierung als hilfreich. Eines der ersten Kommandos, welches das Initialisierungsskript ausführt, ist das klonen des Codes von github.com (Abb. \ref{fig:ist_zustand}, Nr. 2). Das Init-Skript wie auch das Ansible Playbook können auf \href{https://github.com/bfh-semesterarbeit/up-and-running-dataprocessing}{github.com/bfh-semesterarbeit} eingesehen werden.
+Viele Annehmlichkeiten, wie die Nähe zur Shell und Python, das Logging und der deklarative Code zeigten sich in der Realisierung als hilfreich. Eines der ersten Kommandos, welches das Initialisierungsskript ausführt, ist das Klonen des Codes von github.com (Abb. \ref{fig:ist_zustand}, Nr. 2). Das Init-Skript wie auch das Ansible Playbook können auf \href{https://github.com/bfh-semesterarbeit/up-and-running-dataprocessing}{github.com/bfh-semesterarbeit} eingesehen werden.
 
 
 \subsection{Testen der Datenstruktur}
@@ -40,14 +40,14 @@ Bei einer allfälligen Integration des Prototypen in den Betrieb, müsste das Fo
 
 
 \subsection{Inhaltliche Kontrolle der publizierten Daten}\label{kap:inhaltlich}
-Um dem Datenlieferanten, dem Hersteller der 3D Daten, zu ermöglichen, seine Lieferung inhaltlich zu prüfen, wurde ein sogenanntes codepen.io Projekt angelegt, das auf den S3 Bucket des Prototypen zugreift. Das Resultat, des Belastungstests (Kap. \ref{kap:belastungstest}), kann vorläufig\footnote{Bis am 1. November 2020} begutachtet werden. Es ist sozusagen die Frucht der automatischen Geodatenverarbeitung auf Bugdet Instanzen und zeigt alle erfassten 3D Gebäude der Schweiz:
+Um dem Datenlieferanten, dem Hersteller der 3D Daten, zu ermöglichen, seine Lieferung inhaltlich zu prüfen, wurde ein sogenanntes codepen.io Projekt angelegt, das auf den S3 Bucket des Prototypen zugreift. Das Resultat, des Belastungstests (Kap. \ref{kap:belastungstest}), kann vorläufig\footnote{Bis am 1. November 2020} begutachtet werden. Es ist sozusagen die Frucht der automatischen Geodatenverarbeitung auf Budget Instanzen und zeigt alle erfassten 3D Gebäude der Schweiz:
 \href{https://codepen.io/rebert/pen/ExKZmmE}{codepen.io/rebert/pen/ExKZmmE}. Nur die 3D Gebäude kommen vom S3 Testbucket des Prototypen. Das Terrain und die Vegetation werden vom Geoportal des Bundes bezogen (Abb. \ref{fig:ist_zustand}, Nr. 7).
 
 \subsection{Testen}
 Da es sich um eine Datenverarbeitung und nicht um einen öffentlich zugänglichen Web Service handelt, wurde auf End-to-end Testing und Unit-Tests verzichtet. Es wurden lediglich überprüft, ob die Datenverarbeitung auf den Spot Instanzen korrekt durchgeführt werden konnte. Hierzu wurden zwei Arten von Tests gemacht:
 
 \subsubsection{Unerwartete Interrupts}
-Da es in der ganzen Entwicklungsphase zu keinem einzigen Interrupt einer Spot Instanz gekommen ist, musste die Stabilität der Datenverarbeitung auf unerwartete Interrupts manuell getestet werden. Um die Testphasen zu verkürzen, wurde die Menge der Eingangsdaten beschränkt\footnote{Auf ein Schweizerischer Kartenblatt 1:25'000.}.
+Da es in der ganzen Entwicklungsphase zu keinem einzigen Interrupt einer Spot Instanz gekommen ist, musste die Stabilität der Datenverarbeitung auf unerwartete Interrupts manuell getestet werden. Um die Testphasen zu verkürzen, wurde die Menge der Eingangsdaten beschränkt\footnote{Auf ein schweizerisches Kartenblatt 1:25'000.}.
 
 Dieser Test wurde iterativ umgesetzt und der Code wurde bei Fehlern fortlaufend angepasst. 
 

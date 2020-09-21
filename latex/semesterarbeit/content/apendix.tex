@@ -17,7 +17,7 @@
 
 \section{Konfigurationen und Kommandos}
 \subsection{EFS auf EC2-Instanz mounten}
-Anhand einer Anleitung, einem sogenannten Walktrough, wurde via AWS CLI\footnote{AWS Command Line Interface: Ein kommandozeilenorientiertes Werkzeug.} ein
+Anhand einer Anleitung, einem sogenannten Walkthrough, wurde via AWS CLI\footnote{AWS Command Line Interface: Ein kommandozeilenorientiertes Werkzeug.} ein
 EFS an eine EC2-Instanz gemountet und die Rohdaten wurden schon einmal dorthin kopiert. In der Verarbeitung bildet dieses EFS den Ausgang der Datenverarbeitung.
 \appendCode{bash}{EFS auf EC2-Instanz mounten.}{src/walktrough_ec2_and_efs.sh}
 
@@ -27,11 +27,11 @@ Von der Instanz aus können via RESTful API Metadaten der Instanz abgefragt werd
 \appendCode{bash}{Status der Instanz abfragen.}{src/rest_instance_metadata.sh}
 
 \subsection{Well-formed XML}
-Einfaches Skript zum testen, ob alle Dateien well-formed XML sind.
+Einfaches Skript zum Testen, ob alle Dateien well-formed XML sind.
 \appendCode{python}{XML testen.}{src/up-and-running-dataprocessing/ansible/tests/test_xml_wellformed.py}
 
-\subsection{Geodatenverarbeitunsschritte in Ansible}
-Der ganze Code zum hier aufgelisteten Ausschnitt kann auf \href{https://github.com/bfh-semesterarbeit/spot-geoprocessing}{github.com} eingesehen, resp. verwendet, werden:
+\subsection{Geodatenverarbeitungsschritte in Ansible}
+Der ganze Code zum hier aufgelisteten Ausschnitt kann auf \href{https://github.com/bfh-semesterarbeit/spot-geoprocessing}{GitHub} eingesehen, resp. verwendet, werden:
 \appendCode{make}{Nebst dem Setup werden die vier hier Publikationsschritte von Ansible gesteuert.}{src/up-and-running-dataprocessing/ansible/playbooks/processing.yml}
 
 
